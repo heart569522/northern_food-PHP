@@ -32,6 +32,13 @@
                             <!-- <td>ปิ้ง</td> -->
                             <td><a class="btn btn-warning">แก้ไข</a></td>
                         </tr>
+                        <tr style="text-align: center;">
+                            <td>2</td>
+                            <td>123.jpg</td>
+                            <td>ร้านข้าว</td>
+                            <!-- <td>ปิ้ง</td> -->
+                            <td><a class="btn btn-warning">แก้ไข</a></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
