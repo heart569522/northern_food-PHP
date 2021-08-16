@@ -20,7 +20,6 @@
                             <th width="10%">ลำดับ</th>
                             <th width="25%">รูปภาพ</th>
                             <th width="30%">ชื่อร้าน</th>
-                            <!-- <th width="15%">ประเภท</th> -->
                             <th width="30%">จัดการ</th>
                         </tr>
                     </thead>
@@ -29,14 +28,6 @@
                             <td>1</td>
                             <td>123.jpg</td>
                             <td>ร้านอาหาร</td>
-                            <!-- <td>ปิ้ง</td> -->
-                            <td><a class="btn btn-warning">แก้ไข</a></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>2</td>
-                            <td>123.jpg</td>
-                            <td>ร้านข้าว</td>
-                            <!-- <td>ปิ้ง</td> -->
                             <td><a class="btn btn-warning">แก้ไข</a></td>
                         </tr>
                     </tbody>
