@@ -8,7 +8,7 @@
     </div>
     <div class="col-6">
         <a style="float: right;" href="#" class="btn btn-danger" >ลบเมนู</a>
-        <a style="float: right;" href="#" class="btn btn-success" >เพิ่มเมนู</a>
+        <a style="float: right;" href="./add_food.php" class="btn btn-success" >เพิ่มเมนู</a>
     </div>
 </div>
 
