@@ -77,11 +77,13 @@ if ($_SESSION['id'] == "") {
                                 </table>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group" >
-                                <button type="submit" class="btn btn-success">บันทึก</button>
-                                <button type="reset" class="btn btn-danger">ยกเลิก</button>
-                            </div>
+                        <div class="col-12">
+                            <center>
+                                <div class="form-group" style="padding-top: 20px;">
+                                    <button type="submit" class="btn btn-success">บันทึก</button>
+                                    <button type="reset" class="btn btn-danger">ยกเลิก</button>
+                                </div>
+                            </center>
                         </div>
                     </div>    
                 </form>
