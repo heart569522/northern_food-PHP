@@ -1,15 +1,15 @@
-<?php 
-    session_start();
+<?php
+session_start();
 
-    if ($_SESSION['id'] == "") {
-        header("location: signin.php");
-    } else {
+if ($_SESSION['id'] == "") {
+    header("location: signin.php");
+} else {
 
-        require_once 'template_admin/head_template.php';
-        require_once 'template_admin/slidebar_template.php';
-        require_once 'template_admin/topbar_template.php';
-?>    
-            
+    require_once 'template_admin/head_template.php';
+    require_once 'template_admin/slidebar_template.php';
+    require_once 'template_admin/topbar_template.php';
+?>
+
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -24,27 +24,63 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="">ชื่อ</label>
                                 <input type="text" class="form-control" name="food-name">
                             </div>
                             <div class="form-group">
                                 <label for="">ส่วนผสม</label>
-                                <textarea type="text" class="form-control" rows="5" name="ingredients"></textarea>
+                                <textarea type="text" class="form-control" rows="4" name="ingredients"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="">เครื่องเคียง/เครื่องแกง</label>
-                                <textarea type="text" class="form-control" rows="5" name="spices"></textarea>
+                                <textarea type="text" class="form-control" rows="4" name="spices"></textarea>
+                            </div>
+                            <label for="">รูป</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="" id="inputGroupFile01" accept="image/*">
+                                <label class="custom-file-label" for="inputGroupFile01"></label>
+                                <br>
                             </div>
                             <div class="form-group">
-                                <label for="">รูป</label>
-                                <input type="file" class="form-control" id="formFile" name="food-img">
+                                <label for="">คำบรรยาย</label>
+                                <textarea type="text" class="form-control" rows="4" name="description"></textarea>
+                            </div>
+                            <label for="">รูปพื้นหลัง</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="" id="inputGroupFile01" accept="image/*">
+                                <label class="custom-file-label" for="inputGroupFile01"></label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">บันทึก</button>
+                                <button type="reset" class="btn btn-danger">ยกเลิก</button>
                             </div>
                         </form>
                     </div>
                     <div class="col-6">
-
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr style="text-align: center;">
+                                        <th width="10%">ลำดับ</th>
+                                        <th width="20%">รูปภาพ</th>
+                                        <th width="25%">ชื่ออาหาร</th>
+                                        <th width="15%">ประเภท</th>
+                                        <th width="30%">จัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="text-align: center;">
+                                        <td>1</td>
+                                        <td>123.jpg</td>
+                                        <td>ไส้อั่ว</td>
+                                        <td>ปิ้ง</td>
+                                        <td><a class="btn btn-warning">แก้ไข</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,9 +88,8 @@
     </div>
     <!-- /.container-fluid -->
 
-<?php        
-        require_once 'template_admin/script_template.php';
-        require_once 'template_admin/footer_template.php';
-    
-    }
+<?php
+    require_once 'template_admin/script_template.php';
+    require_once 'template_admin/footer_template.php';
+}
 ?>
