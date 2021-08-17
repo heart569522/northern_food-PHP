@@ -12,19 +12,19 @@ if ($_SESSION['id'] == "") {
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <!-- Page Heading -->
+        <!-- Page Heading
         <div class="row">
             <div class="col-6">
                 <h1 class="h3 mb-2 text-gray-800">เพิ่มเมนู</h1>
             </div>
-        </div>
+        </div> -->
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-6">
-                        <form action="" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="">ชื่อ</label>
                                 <input type="text" class="form-control" name="food-name">
@@ -52,37 +52,39 @@ if ($_SESSION['id'] == "") {
                                 <input type="file" class="custom-file-input" name="" id="inputGroupFile01" accept="image/*">
                                 <label class="custom-file-label" for="inputGroupFile01"></label>
                             </div>
-                            <div class="form-group">
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="table_not_pagination" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr style="text-align: center;">
+                                            <th width="10%">ลำดับ</th>
+                                            <th width="20%">รูปภาพ</th>
+                                            <th width="25%">ร้านค้า</th>
+                                            <th width="15%">สถานะ</th>
+                                            <th width="30%">จัดการ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="text-align: center;">
+                                            <td>1</td>
+                                            <td>123.jpg</td>
+                                            <td>ร้านอร่อย</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group" >
                                 <button type="submit" class="btn btn-success">บันทึก</button>
                                 <button type="reset" class="btn btn-danger">ยกเลิก</button>
                             </div>
-                        </form>
-                    </div>
-                    <div class="col-6">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr style="text-align: center;">
-                                        <th width="10%">ลำดับ</th>
-                                        <th width="20%">รูปภาพ</th>
-                                        <th width="25%">ชื่ออาหาร</th>
-                                        <th width="15%">ประเภท</th>
-                                        <th width="30%">จัดการ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr style="text-align: center;">
-                                        <td>1</td>
-                                        <td>123.jpg</td>
-                                        <td>ไส้อั่ว</td>
-                                        <td>ปิ้ง</td>
-                                        <td><a class="btn btn-warning">แก้ไข</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
-                    </div>
-                </div>
+                    </div>    
+                </form>
             </div>
         </div>
     </div>

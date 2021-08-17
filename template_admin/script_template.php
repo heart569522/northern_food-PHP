@@ -21,6 +21,32 @@
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
 
+    <script>
+        $(function () {
+            $("#table_pagination_search_order").DataTable({
+            "paging": true,
+            "responsive": true,
+            "autoWidth": false,
+            "ordering": false,
+            "searching": true,
+            });
+            $('#table_pagination').DataTable({
+            "paging": true,
+            "responsive": true,
+            "autoWidth": false,
+            "ordering": false,
+            "searching": false,
+            });
+            $('#table_not_pagination').DataTable({
+            "paging": false,
+            "responsive": true,
+            "autoWidth": true,
+            "ordering": true,
+            "searching": false,
+            });
+        });
+    </script>
+
 </body>
 
 </html>
