@@ -61,7 +61,7 @@
                                 <div class="form-group">    
                                     <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required>
                                 </div>
-                                <button type="submit" class="btn btn-blue-dark btn-block" name="submit" id="submit">
+                                <button type="submit" class="btn-h btn-blue-dark btn-block" name="submit" id="submit">
                                     Submit
                                 </button>
                             </form>

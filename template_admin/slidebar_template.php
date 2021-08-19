@@ -9,9 +9,9 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin.php">
                 <div class="sidebar-brand-icon">
-                    <i class="fas fa-user-cog"></i>
+                    <i style="color: coral;" class="fas fa-user-cog"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Admin</div>
+                <div style="color: coral;" class="sidebar-brand-text mx-3">Admin</div>
             </a>
 
             <!-- Divider -->
@@ -19,8 +19,8 @@
 
             <!-- Nav Item - Home -->
             <li class="nav-item active">
-                <a class="nav-link" href="admin.php">
-                    <i class="fas fa-home"></i>
+                <a style="color: coral;" class="nav-link" href="admin.php">
+                    <i style="color: coral;" class="fas fa-home"></i>
                     <span>หน้าแรก</span></a>
             </li>
 
@@ -30,8 +30,8 @@
             <!-- Nav Item - Type Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-indent"></i>
-                    <span>ประเภท</span>
+                    <i style="color: coral;" class="fas fa-indent"></i>
+                    <span style="color: coral;">ประเภท</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -45,8 +45,8 @@
             <!-- Nav Item - Edit Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>จัดการ</span>
+                    <i style="color: coral;" class="fas fa-fw fa-wrench"></i>
+                    <span style="color: coral;">จัดการ</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -62,8 +62,8 @@
             <!-- Nav Item - Logout -->
             <li class="nav-item">
                 <a class="nav-link" href="logout.php">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>ออกจากระบบ</span></a>
+                    <i style="color: coral;" class="fas fa-sign-out-alt"></i>
+                    <span style="color: coral;">ออกจากระบบ</span></a>
             </li>
 
             <!-- Divider -->

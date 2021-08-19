@@ -27,7 +27,7 @@
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address...">
                                         </div>
-                                        <a href="login.html" class="btn btn-blue-dark  btn-block">
+                                        <a href="login.html" class="btn-h btn-blue-dark  btn-block">
                                             Reset Password
                                         </a>
                                     </form>

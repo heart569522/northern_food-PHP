@@ -2,10 +2,16 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">รายชื่อร้านค้า</h1>
-    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-    For more information about DataTables, please visit the <a target="_blank"
-        href="https://datatables.net">official DataTables documentation</a>.</p> -->
+    <div class="row">
+        <div class="col-6">
+            <h1 class="h3 mb-2 text-gray-800">รายชื่อร้านค้า</h1>
+        </div>
+        <div class="col-6">
+            <a style="float: right;" href="#" class="btn btn-danger">ลบร้านค้า</a>
+            <a style="float: right;" href="./add_res.php" class="btn btn-success">เพิ่มร้านค้า</a>
+        </div>
+    </div>
+    <br>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">

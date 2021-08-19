@@ -24,11 +24,26 @@ if ($_SESSION['id'] == "") {
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">ชื่อ</label>
                                 <input type="text" class="form-control" name="food-name">
                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">ประเภท</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option disabled>ประเภทอาหาร</option>
+                                    <option value="1">ต้ม</option>
+                                    <option value="2">ปิ้ง</option>
+                                    <option value="3">นึ่ง</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="">ส่วนผสม</label>
                                 <textarea type="text" class="form-control" rows="4" name="ingredients"></textarea>
@@ -54,6 +69,7 @@ if ($_SESSION['id'] == "") {
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
+                            <h4 style="padding-top: 10px;">ชื่อร้านอาหาร</h4>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="table_not_pagination" width="100%" cellspacing="0">
                                     <thead>
@@ -79,10 +95,10 @@ if ($_SESSION['id'] == "") {
                         </div>
                         <div class="col-12">
                             <center>
-                                <div class="form-group" style="padding-top: 20px;">
-                                    <button type="submit" class="btn btn-success">บันทึก</button>
-                                    <button type="reset" class="btn btn-danger">ยกเลิก</button>
-                                </div>
+                            <div class="form-group" style="padding-top: 10px;">
+                                <button type="submit" class="btn btn-success">บันทึก</button>
+                                <button type="reset" class="btn btn-danger">ยกเลิก</button>
+                            </div>
                             </center>
                         </div>
                     </div>    
