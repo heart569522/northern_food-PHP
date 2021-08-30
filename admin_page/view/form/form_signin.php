@@ -25,8 +25,8 @@ if (isset($_REQUEST['btn_login'])) {
                     //if (password_verify($password, $row['password'])) {
                     if ($password == $row['password']) {
                         $_SESSION['admin_login'] = $row['id'];
-                        $loginMsg = "Successfully Login...";
-                        header("refresh:2;admin.php");
+                        $loginMsg = "Successfully Login Please waiting...";
+                        header("refresh:1;admin.php");
                     } else {
                         $errorMsg[] = "Wrong password!";
                     }

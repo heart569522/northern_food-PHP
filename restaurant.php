@@ -2,7 +2,7 @@
 
     session_start();
 
-    if ($_SESSION['id'] == "") {
+    if ($_SESSION['admin_login'] == "") {
         header("location: signin.php");
     } else {
 

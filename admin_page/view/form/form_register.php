@@ -49,11 +49,11 @@
                 $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
                 
                 if($password == $confirm_password){
-                    if ($row['username'] == $username) {
-                        $errorMsg[] = "Sorry username already exists";
-                    } else if ($row['email'] == $email) {
-                        $errorMsg[] = "Sorry email already exists";
-                    } else if (!isset($errorMsg)) {
+                    // if ($row['username'] == $username) {
+                    //     $errorMsg[] = "Sorry username already exists";
+                    // } else if ($row['email'] == $email) {
+                    //     $errorMsg[] = "Sorry email already exists";
+                    // } else if (!isset($errorMsg)) {
                         //$new_password = password_hash($password, PASSWORD_DEFAULT);
                         $insert_stmt = $db->prepare("INSERT INTO nf_admin (username, email, password) VALUES (:username, :email, :password)");
                         if ($insert_stmt->execute(array(
@@ -62,9 +62,10 @@
                             //':password' => $new_password
                             ':password' => $password
                         ))) {
-                            $registerMsg = "Register successfully... Please click on login account link";
+                            $registerMsg = "Register successfully Please waiting...";
+                            header("refresh:1;signin.php");
                         }
-                    }
+                    //}
                 } else {
                     $errorMsg[] = "Passwords do not match!";
                 }
