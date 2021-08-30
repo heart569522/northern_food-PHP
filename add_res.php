@@ -33,7 +33,21 @@ if ($_SESSION['admin_login'] == "") {
     //     }
     // }
     try {
+        $r_name = $_REQUEST['res_name'];
+        $r_status = $_REQUEST['res-status'];
+        $r_map = $_REQUEST['res-map'];
 
+        $img_file = $_FILES['res_img']['name'];
+        $img_type = $_FILES['res_img']['type'];
+        $img_size = $_FILES['res_img']['size'];
+        $img_temp = $_FILES['res_img']['tmp_name'];
+        $img_path = "upload/res/img" . $img_file;
+
+        $bg_file = $_FILES['res_bg']['name'];
+        $bg_type = $_FILES['res_bg']['type'];
+        $bg_size = $_FILES['res_bg']['size'];
+        $bg_temp = $_FILES['res_bg']['tmp_name'];
+        $bg_path = "upload/res/bg" . $bg_file;
 
 
     } catch(PDOException $e) {
@@ -111,7 +125,7 @@ if ($_SESSION['admin_login'] == "") {
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label class="form-label">รูปพื้นหลัง</label>
-                                <input class="form-control" type="file" name="res-img" accept="image/*" enctype="multipart/form-data">
+                                <input class="form-control" type="file" name="res-bg" accept="image/*" enctype="multipart/form-data">
                             </div>
                         </div>
                     </div>
