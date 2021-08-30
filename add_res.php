@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once('./admin_page/model/database.php');
 
 if ($_SESSION['id'] == "") {
     header("location: signin.php");
@@ -8,6 +9,29 @@ if ($_SESSION['id'] == "") {
     require_once 'template_admin/head_template.php';
     require_once 'template_admin/slidebar_template.php';
     require_once 'template_admin/topbar_template.php';
+
+    $insertdata = new DB_con();
+
+    if (isset($_POST['insert_res'])) {
+        $r_name = $_POST['res-name'];
+        $r_status = $_POST['res-status'];
+        $r_map = $_POST['res-map'];
+        
+        $r_img = $_POST['res-img'];
+
+        $r_bg = $_POST['res-bg'];
+
+
+        $sql = $insertdata->insert_res($r_name, $r_status, $r_img, $r_map, $r_bg);
+
+        if ($sql) {
+            echo "<script>alert('Record Inserted Successfully!');</script>";
+            echo "<script>window.location.href='restaurant.php'</script>";
+        } else {
+            echo "<script>alert('Something went wrong! Please try again!');</script>";
+            echo "<script>window.location.href='restaurant.php'</script>";
+        }
+    }
 ?>
 
     <!-- Begin Page Content -->
@@ -29,11 +53,17 @@ if ($_SESSION['id'] == "") {
                                 <label for="">ชื่อร้านค้า</label>
                                 <input type="text" class="form-control" name="res-name">
                             </div>
-                            <label for="">รูปร้านอาหาร</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="" id="inputGroupFile01" accept="image/*">
-                                <label class="custom-file-label" for="inputGroupFile01"></label>
-                                <br>
+                            <div class="form-group">
+                                <label for="">สถานะร้านค้า</label>
+                                <select class="form-select" name="res-status">
+                                    <option disabled>Choose Status</option>
+                                    <option value="open">เปิด</option>
+                                    <option value="close">ปิด</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">รูปร้านอาหาร</label>
+                                <input class="form-control" type="file" name="res-img" accept="image/*" enctype="multipart/form-data">
                             </div>
                         </div>
                         <div class="col-12">
@@ -61,7 +91,7 @@ if ($_SESSION['id'] == "") {
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>    
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -72,11 +102,9 @@ if ($_SESSION['id'] == "") {
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
-                            <label for="">รูปพื้นหลัง</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="" id="inputGroupFile01" accept="image/*">
-                                <label class="custom-file-label" for="inputGroupFile01"></label>
-                                <br>
+                            <div class="form-group">
+                                <label class="form-label">รูปพื้นหลัง</label>
+                                <input class="form-control" type="file" name="res-img" accept="image/*" enctype="multipart/form-data">
                             </div>
                         </div>
                     </div>
@@ -84,12 +112,12 @@ if ($_SESSION['id'] == "") {
                         <div class="col-12">
                             <center>
                                 <div class="form-group" style="padding-top: 20px;">
-                                    <button type="submit" class="btn btn-success">บันทึก</button>
+                                    <button type="submit" name="insert_res" class="btn btn-success">บันทึก</button>
                                     <button type="reset" class="btn btn-danger">ยกเลิก</button>
                                 </div>
                             </center>
                         </div>
-                    </div>    
+                    </div>
                 </form>
             </div>
         </div>

@@ -29,6 +29,38 @@
             $signinquery = mysqli_query($this->dbcon, "SELECT id FROM nf_admin WHERE username = '$uname' AND password = '$password'");
             return $signinquery;
         }
+
+        public function insert_res($r_name, $r_status, $r_img, $r_map, $r_bg) {
+            $result = mysqli_query($this->dbcon, "INSERT INTO nf_res(res_name, res_img, res_map, res_bg, res_status) VALUES('$r_name', '$r_img', '$r_map', '$r_bg', '$r_status')");
+            return $result;
+        }
+
+        public function fetchdata_res() {
+            $result = mysqli_query($this->dbcon, "SELECT * FROM nf_res");
+            return $result;
+        }
+
+        public function fetchonerecord($userid) {
+            $result = mysqli_query($this->dbcon, "SELECT * FROM tblusers WHERE id = '$userid'");
+            return $result;
+        }
+
+        public function update($firstname, $lastname, $email, $phonenumber,	$address, $userid) {
+            $result = mysqli_query($this->dbcon, "UPDATE tblusers SET 
+                firstname = '$firstname',
+                lastname = '$lastname',
+                email = '$email',
+                phonenumber = '$phonenumber',
+                address = '$address'
+                WHERE id = '$userid'
+            ");
+            return $result;
+        }
+
+        public function delete($userid) {
+            $deleterecord = mysqli_query($this->dbcon, "DELETE FROM tblusers WHERE id = '$userid'");
+            return $deleterecord;
+        }
     }
 
 ?>

@@ -1,27 +1,46 @@
-<?php 
-    session_start();
-    include_once('./admin_page/model/database.php'); 
-    
-    $userdata = new DB_con();
+<?php
+require_once('./admin_page/model/connection.php');
+session_start();
 
-    if (isset($_POST['login'])) {
-        $uname = $_POST['username'];
-        // $password = md5($_POST['password']);
-        $password = $_POST['password'];
+if (isset($_SESSION['admin_login'])) {
+    header("location: admin.php");
+}
 
-        $result = $userdata->signin($uname, $password);
-        $num = mysqli_fetch_array($result);
+if (isset($_REQUEST['btn_login'])) {
+    $username = strip_tags($_REQUEST['username']);
+    $password = strip_tags($_REQUEST['password']);
 
-        if ($num > 0) {
-            $_SESSION['id'] = $num['id'];
-            // $_SESSION['uname'] = $num['username'];
-            // echo "<script>alert('Login Successful!');</script>";
-            echo "<script>window.location.href='admin.php'</script>";
-        } else {
-            echo "<script>alert('Something went wrong! Please try again.');</script>";
-            echo "<script>window.location.href='signin.php'</script>";
+    if (empty($username)) {
+        $errorMsg[] = "Please enter usernames";
+    } else if (empty($password)) {
+        $errorMsg[] = "Please enter password";
+    } else {
+        try {
+            $select_stmt = $db->prepare("SELECT * FROM nf_admin WHERE username = :username");
+            $select_stmt->execute(array(':username' => $username));
+            $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($select_stmt->rowCount() > 0) {
+                if ($username == $row['username']) {
+                    //if (password_verify($password, $row['password'])) {
+                    if ($password == $row['password']) {
+                        $_SESSION['admin_login'] = $row['id'];
+                        $loginMsg = "Successfully Login...";
+                        header("refresh:2;admin.php");
+                    } else {
+                        $errorMsg[] = "Wrong password!";
+                    }
+                } else {
+                    $errorMsg[] = "Wrong username";
+                }
+            } else {
+                $errorMsg[] = "Wrong username";
+            }
+        } catch (PDOException $e) {
+           $e->getMessage();
         }
     }
+}
 
 ?>
 
@@ -48,20 +67,34 @@
                                         <h1 class="h4 text-gray-900 mb-4 font-weight-bold">Sign in</h1>
                                     </div>
                                     <form class="user" method="POST">
+                                    <?php 
+                                        if (isset($errorMsg)) {
+                                            foreach($errorMsg as $error) {
+                                    ?>
+                                        <div class="alert alert-danger">
+                                            <strong><?php echo $error; ?></strong>
+                                        </div>
+                                    <?php 
+                                            }
+                                        }
+                                    ?>
+
+                                    <?php 
+                                        if (isset($loginMsg)) {
+                                    ?>
+                                        <div class="alert alert-success">
+                                            <strong><?php echo $loginMsg; ?></strong>
+                                        </div>
+                                    <?php 
+                                        }
+                                    ?>
                                         <div class="form-group">
-                                            <input type="text" name="username" id="username" class="form-control" placeholder="Username..." required>
+                                            <input type="text" name="username" id="username" class="form-control" placeholder="Username...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="password" id="password" class="form-control" placeholder="Password..." required>
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="Password...">
                                         </div>
-                                        <!-- <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div> -->
-                                        <button type="submit" name="login" class="btn-h btn-blue-dark btn-block">
+                                        <button type="submit" name="btn_login" class="btn-h btn-blue-dark btn-block">
                                             Submit
                                         </button>
                                     </form>

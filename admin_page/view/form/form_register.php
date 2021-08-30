@@ -1,25 +1,77 @@
 <?php 
-    include_once('./admin_page/model/database.php'); 
+    // include_once('./admin_page/model/database.php'); 
     
-    $userdata = new DB_con();
+    // $userdata = new DB_con();
 
-    if (isset($_POST['submit'])) {
-        $uname = $_POST['username'];
-        $email = $_POST['email'];
-        // $password = md5($_POST['password']);
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm-password'];
-        if($password == $confirm_password){
-            $sql = $userdata->registration($uname, $email, $password);
-            if ($sql) {
-                echo "<script>alert('Registor Successful!');</script>";
-                echo "<script>window.location.href='signin.php'</script>";
-            } else {
-                echo "<script>alert('Something went wrong! Please try again.');</script>";
-                echo "<script>window.location.href='signin.php'</script>";
+    // if (isset($_POST['submit'])) {
+    //     $uname = $_POST['username'];
+    //     $email = $_POST['email'];
+    //     // $password = md5($_POST['password']);
+    //     $password = $_POST['password'];
+    //     $confirm_password = $_POST['confirm-password'];
+    //     if($password == $confirm_password){
+    //         $sql = $userdata->registration($uname, $email, $password);
+    //         if ($sql) {
+    //             echo "<script>alert('Registor Successful!');</script>";
+    //             echo "<script>window.location.href='signin.php'</script>";
+    //         } else {
+    //             echo "<script>alert('Something went wrong! Please try again.');</script>";
+    //             echo "<script>window.location.href='signin.php'</script>";
+    //         }
+    //     } else {
+    //         echo "<script>alert('Passwords do not match!');</script>";
+    //     }
+    // }
+    require_once('./admin_page/model/connection.php');
+
+    if (isset($_REQUEST['btn_regis'])) {
+        $username = strip_tags($_REQUEST['username']);
+        $email = strip_tags($_REQUEST['email']);
+        $password = strip_tags($_REQUEST['password']);
+        $confirm_password = strip_tags($_REQUEST['confirm-password']);
+
+        if (empty($username)) {
+            $errorMsg[] = "Please enter Username";
+        } else if (empty($email)) {
+            $errorMsg[] = "Please enter Email";
+        } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errorMsg[] = "Please enter a valid email address";
+        } else if (empty($password)) {
+            $errorMsg[] = "Please enter Password";
+        } else if (empty($confirm_password)) {
+            $errorMsg[] = "Please Confirm Password";
+        } /*else if (strlen($password) < 6) {
+            $errorMsg[] = "Password must be atleast 6 characters";
+        }*/ else {
+            try {
+                $select_stmt = $db->prepare("SELECT username, email FROM nf_admin WHERE username = :username OR email = :email");
+                $select_stmt->execute(array(':username' => $username, ':email' => $email));
+                $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                
+                if($password == $confirm_password){
+                    if ($row['username'] == $username) {
+                        $errorMsg[] = "Sorry username already exists";
+                    } else if ($row['email'] == $email) {
+                        $errorMsg[] = "Sorry email already exists";
+                    } else if (!isset($errorMsg)) {
+                        //$new_password = password_hash($password, PASSWORD_DEFAULT);
+                        $insert_stmt = $db->prepare("INSERT INTO nf_admin (username, email, password) VALUES (:username, :email, :password)");
+                        if ($insert_stmt->execute(array(
+                            ':username' => $username,
+                            ':email' => $email,
+                            //':password' => $new_password
+                            ':password' => $password
+                        ))) {
+                            $registerMsg = "Register successfully... Please click on login account link";
+                        }
+                    }
+                } else {
+                    $errorMsg[] = "Passwords do not match!";
+                }
+                
+            } catch(PDOException $e) {
+                echo $e->getMessage();
             }
-        } else {
-            echo "<script>alert('Passwords do not match!');</script>";
         }
     }
 ?>
@@ -48,20 +100,41 @@
                                 <h1 class="h4 text-gray-900 mb-4 font-weight-bold">Sign up</h1>
                             </div>
                             <form class="user" method="POST">
+                                <?php 
+                                    if (isset($errorMsg)) {
+                                        foreach($errorMsg as $error) {
+                                ?>
+                                    <div class="alert alert-danger">
+                                        <strong><?php echo $error; ?></strong>
+                                    </div>
+                                <?php 
+                                        }
+                                    }
+                                ?>
+
+                                <?php 
+                                    if (isset($registerMsg)) {
+                                ?>
+                                    <div class="alert alert-success">
+                                        <strong><?php echo $registerMsg; ?></strong>
+                                    </div>
+                                <?php 
+                                    }
+                                ?>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="username" id="username" placeholder="Username" onblur="checkusername(this.value)" required>
+                                    <input type="text" class="form-control" name="username" id="username" placeholder="Username" onblur="checkusername(this.value)" >
                                     <span id="usernameavailable"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" >
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" >
                                 </div>     
                                 <div class="form-group">    
-                                    <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required>
+                                    <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm Password" >
                                 </div>
-                                <button type="submit" class="btn-h btn-blue-dark btn-block" name="submit" id="submit">
+                                <button type="submit" class="btn-h btn-blue-dark btn-block" name="btn_regis" id="submit">
                                     Submit
                                 </button>
                             </form>
