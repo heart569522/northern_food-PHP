@@ -10,27 +10,34 @@ if ($_SESSION['admin_login'] == "") {
     require_once 'template_admin/slidebar_template.php';
     require_once 'template_admin/topbar_template.php';
 
-    $insertdata = new DB_con();
+    // $insertdata = new DB_con();
 
-    if (isset($_POST['insert_res'])) {
-        $r_name = $_POST['res-name'];
-        $r_status = $_POST['res-status'];
-        $r_map = $_POST['res-map'];
+    // if (isset($_POST['insert_res'])) {
+    //     $r_name = $_POST['res-name'];
+    //     $r_status = $_POST['res-status'];
+    //     $r_map = $_POST['res-map'];
         
-        $r_img = $_POST['res-img'];
+    //     $r_img = $_POST['res-img'];
 
-        $r_bg = $_POST['res-bg'];
+    //     $r_bg = $_POST['res-bg'];
 
 
-        $sql = $insertdata->insert_res($r_name, $r_status, $r_img, $r_map, $r_bg);
+    //     $sql = $insertdata->insert_res($r_name, $r_status, $r_img, $r_map, $r_bg);
 
-        if ($sql) {
-            echo "<script>alert('Record Inserted Successfully!');</script>";
-            echo "<script>window.location.href='restaurant.php'</script>";
-        } else {
-            echo "<script>alert('Something went wrong! Please try again!');</script>";
-            echo "<script>window.location.href='restaurant.php'</script>";
-        }
+    //     if ($sql) {
+    //         echo "<script>alert('Record Inserted Successfully!');</script>";
+    //         echo "<script>window.location.href='restaurant.php'</script>";
+    //     } else {
+    //         echo "<script>alert('Something went wrong! Please try again!');</script>";
+    //         echo "<script>window.location.href='restaurant.php'</script>";
+    //     }
+    // }
+    try {
+
+
+
+    } catch(PDOException $e) {
+        $e->getMessage();
     }
 ?>
 
@@ -57,8 +64,8 @@ if ($_SESSION['admin_login'] == "") {
                                 <label for="">สถานะร้านค้า</label>
                                 <select class="form-select" name="res-status">
                                     <option disabled>Choose Status</option>
-                                    <option value="open">เปิด</option>
-                                    <option value="close">ปิด</option>
+                                    <option value="เปิด">เปิด</option>
+                                    <option value="ปิด">ปิด</option>
                                 </select>
                             </div>
                             <div class="form-group">
