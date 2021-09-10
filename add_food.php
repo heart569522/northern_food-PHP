@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once('./admin_page/model/connection.php');
 
 if ($_SESSION['admin_login'] == "") {
     header("location: signin.php");
@@ -8,6 +9,67 @@ if ($_SESSION['admin_login'] == "") {
     require_once 'template_admin/head_template.php';
     require_once 'template_admin/slidebar_template.php';
     require_once 'template_admin/topbar_template.php';
+
+    $type = $db->prepare('SELECT * from nf_type');
+    $type->execute();
+    $data = $type->fetchAll();
+
+    if (isset($_REQUEST['insert_food'])) {
+        try {
+            $r_name = $_REQUEST['res-name'];
+            $r_desc = $_REQUEST['res-desc'];
+            $r_map = $_REQUEST['res-map'];
+
+            $img_file = $_FILES['res-img']['name'];
+            $img_type = $_FILES['res-img']['type'];
+            $img_size = $_FILES['res-img']['size'];
+            $img_temp = $_FILES['res-img']['tmp_name'];
+            $img_path = "upload/res/img" . $img_file;
+
+            $bg_file = $_FILES['res-bg']['name'];
+            $bg_type = $_FILES['res-bg']['type'];
+            $bg_size = $_FILES['res-bg']['size'];
+            $bg_temp = $_FILES['res-bg']['tmp_name'];
+            $bg_path = "upload/res/bg" . $bg_file;
+
+            if (empty($r_name)) {
+                $errorMsg = "ใส่ชื่อร้านอาหาร";
+            } else if (empty($r_map)) {
+                $errorMsg = "ใส่แผนที่";
+            } else if (empty($img_file)) {
+                $errorMsg = "เลือกรูปร้านอาหาร";
+            } else if (empty($bg_file)) {
+                $errorMsg = "เลือกรูปพื้นหลัง";
+            } else if ($img_type == "image/jpg" || $img_type == 'image/jpeg' || $img_type == "image/png" || $img_type == "image/gif" && $bg_type == "image/jpg" || $bg_type == 'image/jpeg' || $bg_type == "image/png" || $bg_type == "image/gif") {
+                if (!file_exists($img_path && $bg_path)) { // check file not exist in your upload folder path
+                    if ($img_size && $bg_size < 5000000) { // check file size 5MB
+                        move_uploaded_file($img_temp, 'upload/res/img/' . $img_file); // move upload file temperory directory to your upload folder
+                        move_uploaded_file($bg_temp, 'upload/res/bg/' . $bg_file);
+                    } else {
+                        $errorMsg = "โปรดอัปโหลดไฟล์ที่มีขนาดไม่เกิน 5MB"; // error message file size larger than 5mb
+                    }
+                } else {
+                    $errorMsg = "มีไฟล์นี้อยู่แล้ว โปรดตรวจสอบในโฟลเดอร์ Upload"; // error message file not exists your upload folder path
+                }
+            }
+
+            if (!isset($errorMsg)) {
+                $insert_stmt = $db->prepare('INSERT INTO nf_res(res_name, res_img, res_map, res_bg, res_desc) VALUES (:r_name, :r_img, :r_map, :r_bg, :r_desc)');
+                $insert_stmt->bindParam(':r_name', $r_name);
+                $insert_stmt->bindParam(':r_img', $img_file);
+                $insert_stmt->bindParam(':r_map', $r_map);
+                $insert_stmt->bindParam(':r_bg', $bg_file);
+                $insert_stmt->bindParam(':r_desc', $r_desc);
+
+                if ($insert_stmt->execute()) {
+                    $insertMsg = "เพิ่มข้อมูลสำเร็จ...";
+                    //header('refresh:1; restaurant.php');
+                }
+            }
+        } catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
 ?>
 
     <!-- Begin Page Content -->
@@ -18,6 +80,23 @@ if ($_SESSION['admin_login'] == "") {
                 <h1 class="h3 mb-2 text-gray-800">เพิ่มเมนู</h1>
             </div>
         </div> -->
+        <?php
+        if (isset($errorMsg)) {
+        ?>
+            <div class="alert alert-danger alert-dismissible fade show">
+                <strong><?php echo $errorMsg; ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
+
+        <?php
+        if (isset($insertMsg)) {
+        ?>
+            <div class="alert alert-success alert-dismissible fade show">
+                <strong><?php echo $insertMsg; ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -33,11 +112,13 @@ if ($_SESSION['admin_login'] == "") {
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">ประเภท</label>
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" name="food-type">
                                     <option disabled>ประเภทอาหาร</option>
-                                    <option value="1">ต้ม</option>
-                                    <option value="2">ปิ้ง</option>
-                                    <option value="3">นึ่ง</option>
+                                    <?php foreach ($data as $row) { ?>
+                                        <option value="<?php echo $row["type_name"]; ?>">
+                                            <?php echo $row["type_name"]; ?>
+                                        </option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -46,29 +127,26 @@ if ($_SESSION['admin_login'] == "") {
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="">ส่วนผสม</label>
-                                <textarea type="text" class="form-control" rows="4" name="ingredients"></textarea>
+                                <textarea type="text" class="form-control" rows="4" name="food-ingredients"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="">เครื่องเคียง/เครื่องแกง</label>
-                                <textarea type="text" class="form-control" rows="4" name="spices"></textarea>
+                                <textarea type="text" class="form-control" rows="4" name="food-spices"></textarea>
                             </div>
-                            <label for="">รูป</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="" id="inputGroupFile01" accept="image/*">
-                                <label class="custom-file-label" for="inputGroupFile01"></label>
-                                <br>
+                            <div class="form-group">
+                                <label class="form-label">รูป</label>
+                                <input class="form-control" type="file" name="food-img">
                             </div>
                             <div class="form-group">
                                 <label for="">คำบรรยาย</label>
-                                <textarea type="text" class="form-control" rows="4" name="description"></textarea>
+                                <textarea type="text" class="form-control" rows="4" name="food-desc"></textarea>
                             </div>
-                            <label for="">รูปพื้นหลัง</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="" id="inputGroupFile01" accept="image/*">
-                                <label class="custom-file-label" for="inputGroupFile01"></label>
+                            <div class="form-group">
+                                <label class="form-label">รูปพื้นหลัง</label>
+                                <input class="form-control" type="file" name="food-bg">
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
+                        <!-- <div class="col-md-6 col-sm-12">
                             <h4 style="padding-top: 10px;">ชื่อร้านอาหาร</h4>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="table_not_pagination" width="100%" cellspacing="0">
@@ -92,16 +170,16 @@ if ($_SESSION['admin_login'] == "") {
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-12">
                             <center>
-                            <div class="form-group" style="padding-top: 10px;">
-                                <button type="submit" class="btn btn-success">บันทึก</button>
-                                <button type="reset" class="btn btn-danger">ยกเลิก</button>
-                            </div>
+                                <div class="form-group" style="padding-top: 10px;">
+                                    <button type="submit" name="insert_food" class="btn btn-success">บันทึก</button>
+                                    <button type="reset" class="btn btn-danger">ยกเลิก</button>
+                                </div>
                             </center>
                         </div>
-                    </div>    
+                    </div>
                 </form>
             </div>
         </div>
