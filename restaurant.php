@@ -1,5 +1,7 @@
+<?ob_start();?>
 <?php 
 
+    require_once('./admin_page/model/connection.php');
     session_start();
 
     if ($_SESSION['admin_login'] == "") {

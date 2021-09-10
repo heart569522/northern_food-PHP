@@ -105,8 +105,9 @@
                                     if (isset($errorMsg)) {
                                         foreach($errorMsg as $error) {
                                 ?>
-                                    <div class="alert alert-danger">
+                                    <div class="alert alert-danger alert-dismissible fade show">
                                         <strong><?php echo $error; ?></strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
                                 <?php 
                                         }
@@ -116,8 +117,9 @@
                                 <?php 
                                     if (isset($registerMsg)) {
                                 ?>
-                                    <div class="alert alert-success">
+                                    <div class="alert alert-success alert-dismissible fade show">
                                         <strong><?php echo $registerMsg; ?></strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
                                 <?php 
                                     }

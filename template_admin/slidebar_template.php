@@ -1,3 +1,4 @@
+<?ob_start();?>
 <body id="page-top">
 
     <!-- Page Wrapper -->
