@@ -62,12 +62,14 @@ if ($_SESSION['admin_login'] == "") {
             }
 
             if (!isset($errorMsg)) {
-                $insert_stmt = $db->prepare('INSERT INTO nf_food(res_name, res_img, res_map, res_bg, res_desc) VALUES (:r_name, :r_img, :r_map, :r_bg, :r_desc)');
-                $insert_stmt->bindParam(':r_name', $r_name);
-                $insert_stmt->bindParam(':r_img', $img_file);
-                $insert_stmt->bindParam(':r_map', $r_map);
-                $insert_stmt->bindParam(':r_bg', $bg_file);
-                $insert_stmt->bindParam(':r_desc', $r_desc);
+                $insert_stmt = $db->prepare('INSERT INTO nf_food(food_name, food_desc, food_img, food_ingredients, food_spices, food_bg) VALUES (:r_name, :r_img, :r_map, :r_bg, :r_desc)');
+                $insert_stmt->bindParam(':f_name', $r_name);
+                $insert_stmt->bindParam(':f_desc', $f_desc);
+                $insert_stmt->bindParam(':f_img', $img_file);
+                $insert_stmt->bindParam(':f_ingredients', $f_ingreedients);
+                $insert_stmt->bindParam(':f_spices', $f_spices);
+                $insert_stmt->bindParam(':f_bg', $bg_file);
+                
 
                 if ($insert_stmt->execute()) {
                     $insertMsg = "เพิ่มข้อมูลสำเร็จ...";
