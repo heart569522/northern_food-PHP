@@ -16,26 +16,34 @@ if ($_SESSION['admin_login'] == "") {
 
     if (isset($_REQUEST['insert_food'])) {
         try {
-            $r_name = $_REQUEST['res-name'];
-            $r_desc = $_REQUEST['res-desc'];
-            $r_map = $_REQUEST['res-map'];
-
-            $img_file = $_FILES['res-img']['name'];
-            $img_type = $_FILES['res-img']['type'];
-            $img_size = $_FILES['res-img']['size'];
-            $img_temp = $_FILES['res-img']['tmp_name'];
-            $img_path = "upload/res/img" . $img_file;
+            $f_name = $_REQUEST['food-name'];
+            $f_type = $_REQUEST['food-type'];
+            $f_ingreedients = $_REQUEST['food-ingredients'];
+            $f_spices = $_REQUEST['food-spice'];
+            $f_desc = $_REQUEST['food-desc'];
+            
+            $img_file = $_FILES['food-img']['name'];
+            $img_type = $_FILES['food-img']['type'];
+            $img_size = $_FILES['food-img']['size'];
+            $img_temp = $_FILES['food-img']['tmp_name'];
+            $img_path = "upload/food/img" . $img_file;
 
             $bg_file = $_FILES['res-bg']['name'];
             $bg_type = $_FILES['res-bg']['type'];
             $bg_size = $_FILES['res-bg']['size'];
             $bg_temp = $_FILES['res-bg']['tmp_name'];
-            $bg_path = "upload/res/bg" . $bg_file;
+            $bg_path = "upload/food/bg" . $bg_file;
 
-            if (empty($r_name)) {
-                $errorMsg = "ใส่ชื่อร้านอาหาร";
-            } else if (empty($r_map)) {
-                $errorMsg = "ใส่แผนที่";
+            if (empty($f_name)) {
+                $errorMsg = "ใส่ชื่ออาหาร";
+            } else if (empty($f_type)) {
+                $errorMsg = "เลือกประเภท";
+            } else if (empty($f_ingreedients)) {
+                $errorMsg = "ใส่วัตถุดิบ/ส่วนผสม";
+            } else if (empty($f_spices)) {
+                $errorMsg = "ใส่เครื่องเทศ/เครื่องแกง";
+            } else if (empty($f_desc)) {
+                $errorMsg = "ใส่คำอธิบาย";
             } else if (empty($img_file)) {
                 $errorMsg = "เลือกรูปร้านอาหาร";
             } else if (empty($bg_file)) {
@@ -43,8 +51,8 @@ if ($_SESSION['admin_login'] == "") {
             } else if ($img_type == "image/jpg" || $img_type == 'image/jpeg' || $img_type == "image/png" || $img_type == "image/gif" && $bg_type == "image/jpg" || $bg_type == 'image/jpeg' || $bg_type == "image/png" || $bg_type == "image/gif") {
                 if (!file_exists($img_path && $bg_path)) { // check file not exist in your upload folder path
                     if ($img_size && $bg_size < 5000000) { // check file size 5MB
-                        move_uploaded_file($img_temp, 'upload/res/img/' . $img_file); // move upload file temperory directory to your upload folder
-                        move_uploaded_file($bg_temp, 'upload/res/bg/' . $bg_file);
+                        move_uploaded_file($img_temp, 'upload/food/img/' . $img_file); // move upload file temperory directory to your upload folder
+                        move_uploaded_file($bg_temp, 'upload/food/bg/' . $bg_file);
                     } else {
                         $errorMsg = "โปรดอัปโหลดไฟล์ที่มีขนาดไม่เกิน 5MB"; // error message file size larger than 5mb
                     }
