@@ -62,7 +62,7 @@ if ($_SESSION['admin_login'] == "") {
             }
 
             if (!isset($errorMsg)) {
-                $insert_stmt = $db->prepare('INSERT INTO nf_res(res_name, res_img, res_map, res_bg, res_desc) VALUES (:r_name, :r_img, :r_map, :r_bg, :r_desc)');
+                $insert_stmt = $db->prepare('INSERT INTO nf_food(res_name, res_img, res_map, res_bg, res_desc) VALUES (:r_name, :r_img, :r_map, :r_bg, :r_desc)');
                 $insert_stmt->bindParam(':r_name', $r_name);
                 $insert_stmt->bindParam(':r_img', $img_file);
                 $insert_stmt->bindParam(':r_map', $r_map);
