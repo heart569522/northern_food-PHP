@@ -79,7 +79,7 @@ if ($_SESSION['admin_login'] == "") {
                 }
             }
             if (!isset($errorMsg)) {
-                $insert_stmt2 = $db->prepare('INSERT INTO nf_food_type(food_id, type_id) VALUES ((SELECT food_id FROM nf_food WHERE food_id), :f_type)');
+                $insert_stmt2 = $db->prepare('INSERT INTO nf_food_type(food_id, type_id) VALUES ((SELECT food_id FROM nf_food), :f_type)');
                 $insert_stmt2->bindParam(':f_type', $f_type);
                 
                 if ($insert_stmt2->execute()) {
@@ -138,7 +138,7 @@ if ($_SESSION['admin_login'] == "") {
                                 <select class="form-select" name="food-type">
                                     <option disabled>ประเภทอาหาร</option>
                                     <?php foreach ($data as $row) { ?>
-                                        <option value="<?php echo $row["type_name"]; ?>">
+                                        <option value="<?php echo $row["type_id"]; ?>">
                                             <?php echo $row["type_name"]; ?>
                                         </option>
                                     <?php } ?>
