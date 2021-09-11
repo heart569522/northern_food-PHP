@@ -72,14 +72,14 @@ if ($_SESSION['admin_login'] == "") {
 
                 // $insert_stmt = $db->prepare('INSERT INTO nf_food_type(food_id, type_id) VALUES ((SELECT food_id FROM nf_food WHERE food_id), :f_type)');
                 // $insert_stmt->bindParam(':f_type', $f_type);
-                
+                $last_id = $db->lastInsertId();
+
                 if ($insert_stmt->execute()) {
-                    $insertMsg = "เพิ่มข้อมูลสำเร็จ... food";
+                    $insertMsg = "เพิ่มข้อมูลสำเร็จ... food ".$db->lastInsertId();
                     //header('refresh:1; restaurant.php');
                 }
-            }
-            if (!isset($errorMsg)) {
-                $insert_stmt2 = $db->prepare('INSERT INTO nf_food_type(food_id, type_id) VALUES ((SELECT food_id FROM nf_food), :f_type)');
+
+                $insert_stmt2 = $db->prepare("INSERT INTO nf_food_type(type_id) VALUES (:f_type)");
                 $insert_stmt2->bindParam(':f_type', $f_type);
                 
                 if ($insert_stmt2->execute()) {
@@ -87,11 +87,15 @@ if ($_SESSION['admin_login'] == "") {
                     //header('refresh:1; restaurant.php');
                 }
             }
+            // if (!isset($errorMsg)) {
+                
+            // }
 
 
         } catch (PDOException $e) {
             $e->getMessage();
         }
+        $db = null;
     }
 ?>
 
