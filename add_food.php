@@ -19,7 +19,7 @@ if ($_SESSION['admin_login'] == "") {
             $f_name = $_REQUEST['food-name'];
             $f_type = $_REQUEST['food-type'];
             $f_ingreedients = $_REQUEST['food-ingredients'];
-            $f_spices = $_REQUEST['food-spice'];
+            $f_spices = $_REQUEST['food-spices'];
             $f_desc = $_REQUEST['food-desc'];
             
             $img_file = $_FILES['food-img']['name'];
@@ -28,10 +28,10 @@ if ($_SESSION['admin_login'] == "") {
             $img_temp = $_FILES['food-img']['tmp_name'];
             $img_path = "upload/food/img" . $img_file;
 
-            $bg_file = $_FILES['res-bg']['name'];
-            $bg_type = $_FILES['res-bg']['type'];
-            $bg_size = $_FILES['res-bg']['size'];
-            $bg_temp = $_FILES['res-bg']['tmp_name'];
+            $bg_file = $_FILES['food-bg']['name'];
+            $bg_type = $_FILES['food-bg']['type'];
+            $bg_size = $_FILES['food-bg']['size'];
+            $bg_temp = $_FILES['food-bg']['tmp_name'];
             $bg_path = "upload/food/bg" . $bg_file;
 
             if (empty($f_name)) {
@@ -63,27 +63,32 @@ if ($_SESSION['admin_login'] == "") {
 
             if (!isset($errorMsg)) {
                 $insert_stmt = $db->prepare('INSERT INTO nf_food(food_name, food_desc, food_img, food_ingredients, food_spices, food_bg) VALUES (:f_name, :f_desc, :f_img, :f_ingredients, :f_spices, :f_bg)');
-                $insert_stmt->bindParam(':f_name', $r_name);
+                $insert_stmt->bindParam(':f_name', $f_name);
                 $insert_stmt->bindParam(':f_desc', $f_desc);
                 $insert_stmt->bindParam(':f_img', $img_file);
                 $insert_stmt->bindParam(':f_ingredients', $f_ingreedients);
                 $insert_stmt->bindParam(':f_spices', $f_spices);
                 $insert_stmt->bindParam(':f_bg', $bg_file);
 
-                // $insert_stmt = $db->prepare('INSERT INTO nf_food(food_name, food_desc, food_img, food_ingredients, food_spices, food_bg) VALUES (:f_name, :f_desc, :f_img, :f_ingredients, :f_spices, :f_bg)');
-                // $insert_stmt->bindParam(':f_name', $r_name);
-                // $insert_stmt->bindParam(':f_desc', $f_desc);
-                // $insert_stmt->bindParam(':f_img', $img_file);
-                // $insert_stmt->bindParam(':f_ingredients', $f_ingreedients);
-                // $insert_stmt->bindParam(':f_spices', $f_spices);
-                // $insert_stmt->bindParam(':f_bg', $bg_file);
+                // $insert_stmt = $db->prepare('INSERT INTO nf_food_type(food_id, type_id) VALUES ((SELECT food_id FROM nf_food WHERE food_id), :f_type)');
+                // $insert_stmt->bindParam(':f_type', $f_type);
                 
-
                 if ($insert_stmt->execute()) {
-                    $insertMsg = "เพิ่มข้อมูลสำเร็จ...";
+                    $insertMsg = "เพิ่มข้อมูลสำเร็จ... food";
                     //header('refresh:1; restaurant.php');
                 }
             }
+            if (!isset($errorMsg)) {
+                $insert_stmt2 = $db->prepare('INSERT INTO nf_food_type(food_id, type_id) VALUES ((SELECT food_id FROM nf_food WHERE food_id), :f_type)');
+                $insert_stmt2->bindParam(':f_type', $f_type);
+                
+                if ($insert_stmt2->execute()) {
+                    $insertMsg = "เพิ่มข้อมูลสำเร็จ... type";
+                    //header('refresh:1; restaurant.php');
+                }
+            }
+
+
         } catch (PDOException $e) {
             $e->getMessage();
         }
@@ -152,7 +157,7 @@ if ($_SESSION['admin_login'] == "") {
                                 <textarea type="text" class="form-control" rows="4" name="food-spices"></textarea>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">รูป</label>
+                                <label class="form-label">รูปอาหาร</label>
                                 <input class="form-control" type="file" name="food-img">
                             </div>
                             <div class="form-group">
