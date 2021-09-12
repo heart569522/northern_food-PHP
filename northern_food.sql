@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2021 at 06:45 PM
+-- Generation Time: Sep 11, 2021 at 02:56 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -31,18 +31,19 @@ CREATE TABLE `nf_admin` (
   `id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL
+  `email` varchar(100) NOT NULL,
+  `registered` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `nf_admin`
 --
 
-INSERT INTO `nf_admin` (`id`, `username`, `password`, `email`) VALUES
-(5, 'admin', 'admin', 'admin@admin.com'),
-(6, 'heart', '1234', 'heart@heart.com'),
-(8, 'test', '1234', 'test@test.com'),
-(9, 'parn', '1234', 'parn@parn.com');
+INSERT INTO `nf_admin` (`id`, `username`, `password`, `email`, `registered`) VALUES
+(5, 'admin', 'admin', 'admin@admin.com', '2021-08-30 15:06:44'),
+(6, 'heart', '1234', 'heart@heart.com', '2021-08-30 15:08:29'),
+(8, 'test', '1234', 'test@test.com', '2021-08-30 15:14:30'),
+(9, 'parn', '1234', 'parn@parn.com', '2021-09-08 18:51:08');
 
 -- --------------------------------------------------------
 
@@ -57,20 +58,9 @@ CREATE TABLE `nf_food` (
   `food_img` text NOT NULL,
   `food_ingredients` text NOT NULL,
   `food_spices` text NOT NULL,
-  `food_bg` text NOT NULL
+  `food_bg` text NOT NULL,
+  `food_rec` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `nf_food`
---
-
-INSERT INTO `nf_food` (`food_id`, `food_name`, `food_desc`, `food_img`, `food_ingredients`, `food_spices`, `food_bg`) VALUES
-(17, 'gsgsdf', 'sdfgdsfg', '2312.jpg', 'gsdfg', 'sdfgsdfg', 'art_artwork_fantasy_artistic_original_abstract_abstraction_5184x3456.jpg'),
-(18, 'gsgsdf', 'sdfgdsfg', '2312.jpg', 'gsdfg', 'sdfgsdfg', 'art_artwork_fantasy_artistic_original_abstract_abstraction_5184x3456.jpg'),
-(19, 'gsgsdf', 'sdfgdsfg', '2312.jpg', 'gsdfg', 'sdfgsdfg', 'art_artwork_fantasy_artistic_original_abstract_abstraction_5184x3456.jpg'),
-(20, 'asdfasdf', 'asdfasdfasdf', '2312.jpg', 'asdfasdf', 'asdf', 'art_artwork_fantasy_artistic_original_abstract_abstraction_5184x3456.jpg'),
-(21, 'ghjghj', 'ghjghj', 'ghjghjghjg.jpg', 'ghjghj', 'ghjfgdfg', 'dfgdfg.png'),
-(22, 'ไส้อั่ว', 'อร่อยดี เผ็ดหน่อยๆ', 'asd.jpg', 'ไม่รุ้', 'ไม่รุ้', 'asd.png');
 
 -- --------------------------------------------------------
 
@@ -96,13 +86,6 @@ CREATE TABLE `nf_food_type` (
   `type_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `nf_food_type`
---
-
-INSERT INTO `nf_food_type` (`food_type_id`, `food_id`, `type_id`) VALUES
-(5, 22, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -115,15 +98,16 @@ CREATE TABLE `nf_res` (
   `res_img` text NOT NULL,
   `res_map` text NOT NULL,
   `res_bg` text NOT NULL,
-  `res_desc` text NOT NULL
+  `res_desc` text NOT NULL,
+  `res_rec` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `nf_res`
 --
 
-INSERT INTO `nf_res` (`res_id`, `res_name`, `res_img`, `res_map`, `res_bg`, `res_desc`) VALUES
-(12, 'tset', '2312.jpg', 'rsfsfsDF', 'art_artwork_fantasy_artistic_original_abstract_abstraction_5184x3456.jpg', 'tsesdfsadfasf');
+INSERT INTO `nf_res` (`res_id`, `res_name`, `res_img`, `res_map`, `res_bg`, `res_desc`, `res_rec`) VALUES
+(12, 'tset', '2312.jpg', 'rsfsfsDF', 'art_artwork_fantasy_artistic_original_abstract_abstraction_5184x3456.jpg', 'tsesdfsadfasf', '2021-09-09 16:13:14');
 
 -- --------------------------------------------------------
 
@@ -157,7 +141,8 @@ CREATE TABLE `nf_user` (
   `id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `registered` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -181,16 +166,16 @@ ALTER TABLE `nf_food`
 --
 ALTER TABLE `nf_food_res`
   ADD PRIMARY KEY (`food_res_id`),
-  ADD KEY `res_id` (`res_id`),
-  ADD KEY `food_id` (`food_id`);
+  ADD KEY `food_id` (`food_id`),
+  ADD KEY `res_id` (`res_id`);
 
 --
 -- Indexes for table `nf_food_type`
 --
 ALTER TABLE `nf_food_type`
   ADD PRIMARY KEY (`food_type_id`),
-  ADD KEY `type_id` (`type_id`),
-  ADD KEY `food_id` (`food_id`);
+  ADD KEY `food_id` (`food_id`),
+  ADD KEY `type_id` (`type_id`);
 
 --
 -- Indexes for table `nf_res`
@@ -224,7 +209,7 @@ ALTER TABLE `nf_admin`
 -- AUTO_INCREMENT for table `nf_food`
 --
 ALTER TABLE `nf_food`
-  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nf_food_res`
@@ -236,7 +221,7 @@ ALTER TABLE `nf_food_res`
 -- AUTO_INCREMENT for table `nf_food_type`
 --
 ALTER TABLE `nf_food_type`
-  MODIFY `food_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `food_type_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nf_res`
@@ -264,15 +249,15 @@ ALTER TABLE `nf_user`
 -- Constraints for table `nf_food_res`
 --
 ALTER TABLE `nf_food_res`
-  ADD CONSTRAINT `nf_food_res_ibfk_2` FOREIGN KEY (`res_id`) REFERENCES `nf_res` (`res_id`),
-  ADD CONSTRAINT `nf_food_res_ibfk_3` FOREIGN KEY (`food_id`) REFERENCES `nf_food` (`food_id`);
+  ADD CONSTRAINT `nf_food_res_ibfk_1` FOREIGN KEY (`food_id`) REFERENCES `nf_food` (`food_id`),
+  ADD CONSTRAINT `nf_food_res_ibfk_2` FOREIGN KEY (`res_id`) REFERENCES `nf_res` (`res_id`);
 
 --
 -- Constraints for table `nf_food_type`
 --
 ALTER TABLE `nf_food_type`
-  ADD CONSTRAINT `nf_food_type_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `nf_type` (`type_id`),
-  ADD CONSTRAINT `nf_food_type_ibfk_3` FOREIGN KEY (`food_id`) REFERENCES `nf_food` (`food_id`);
+  ADD CONSTRAINT `nf_food_type_ibfk_1` FOREIGN KEY (`food_id`) REFERENCES `nf_food` (`food_id`),
+  ADD CONSTRAINT `nf_food_type_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `nf_type` (`type_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
