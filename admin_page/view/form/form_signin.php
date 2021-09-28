@@ -11,9 +11,9 @@ if (isset($_REQUEST['btn_login'])) {
     $password = strip_tags($_REQUEST['password']);
 
     if (empty($username)) {
-        $errorMsg[] = "Please enter usernames";
+        $errorMsg[] = "Please Enter Username";
     } else if (empty($password)) {
-        $errorMsg[] = "Please enter password";
+        $errorMsg[] = "Please Enter Password";
     } else {
         try {
             $select_stmt = $db->prepare("SELECT * FROM nf_admin WHERE username = :username");

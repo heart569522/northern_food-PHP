@@ -62,51 +62,35 @@ if ($_SESSION['admin_login'] == "") {
             }
 
             if (!isset($errorMsg)) {
-                $insert_stmt = $db->prepare('INSERT INTO nf_food(food_name, food_desc, food_img, food_ingredients, food_spices, food_bg) VALUES (:f_name, :f_desc, :f_img, :f_ingredients, :f_spices, :f_bg)');
+                $insert_stmt = $db->prepare('INSERT INTO nf_food(food_name, food_desc, food_img, food_ingredients, food_spices, food_bg, type_id) VALUES (:f_name, :f_desc, :f_img, :f_ingredients, :f_spices, :f_bg, :f_type)');
                 $insert_stmt->bindParam(':f_name', $f_name);
                 $insert_stmt->bindParam(':f_desc', $f_desc);
                 $insert_stmt->bindParam(':f_img', $img_file);
                 $insert_stmt->bindParam(':f_ingredients', $f_ingreedients);
                 $insert_stmt->bindParam(':f_spices', $f_spices);
                 $insert_stmt->bindParam(':f_bg', $bg_file);
-
-                // $insert_stmt = $db->prepare('INSERT INTO nf_food_type(food_id, type_id) VALUES ((SELECT food_id FROM nf_food WHERE food_id), :f_type)');
-                // $insert_stmt->bindParam(':f_type', $f_type);
-                $last_id = $db->lastInsertId();
+                $insert_stmt->bindParam(':f_type', $f_type);
 
                 if ($insert_stmt->execute()) {
-                    $insertMsg = "เพิ่มข้อมูลสำเร็จ... food ".$db->lastInsertId();
-                    //header('refresh:1; restaurant.php');
-                }
-
-                $insert_stmt2 = $db->prepare("INSERT INTO nf_food_type(type_id) VALUES (:f_type)");
-                $insert_stmt2->bindParam(':f_type', $f_type);
-                
-                if ($insert_stmt2->execute()) {
-                    $insertMsg = "เพิ่มข้อมูลสำเร็จ... type";
+                    $insertMsg = "เพิ่มข้อมูลสำเร็จ...";
                     //header('refresh:1; restaurant.php');
                 }
             }
-            // if (!isset($errorMsg)) {
-                
-            // }
-
 
         } catch (PDOException $e) {
             $e->getMessage();
         }
-        $db = null;
     }
 ?>
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <!-- Page Heading
+        <!-- Page Heading -->
         <div class="row">
             <div class="col-6">
-                <h1 class="h3 mb-2 text-gray-800">เพิ่มเมนู</h1>
+                <h1 class="h3 mb-2 text-gray">เพิ่มเมนู</h1>
             </div>
-        </div> -->
+        </div>
         <?php
         if (isset($errorMsg)) {
         ?>
@@ -173,31 +157,7 @@ if ($_SESSION['admin_login'] == "") {
                                 <input class="form-control" type="file" name="food-bg">
                             </div>
                         </div>
-                        <!-- <div class="col-md-6 col-sm-12">
-                            <h4 style="padding-top: 10px;">ชื่อร้านอาหาร</h4>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="table_not_pagination" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr style="text-align: center;">
-                                            <th width="10%">ลำดับ</th>
-                                            <th width="20%">รูปภาพ</th>
-                                            <th width="25%">ร้านค้า</th>
-                                            <th width="15%">สถานะ</th>
-                                            <th width="30%">จัดการ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr style="text-align: center;">
-                                            <td>1</td>
-                                            <td>123.jpg</td>
-                                            <td>ร้านอร่อย</td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> -->
+                        
                         <div class="col-12">
                             <center>
                                 <div class="form-group" style="padding-top: 10px;">

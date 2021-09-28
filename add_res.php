@@ -70,11 +70,11 @@ if ($_SESSION['admin_login'] == "") {
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <!-- Page Heading -->
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-6">
-                <h1 class="h3 mb-2 text-gray-800">เพิ่มเมนู</h1>
+                <h1 class="h3 mb-2 text-gray">เพิ่มร้านค้า</h1>
             </div>
-        </div> -->
+        </div>
         <?php
         if (isset($errorMsg)) {
         ?>
@@ -112,48 +112,23 @@ if ($_SESSION['admin_login'] == "") {
                                 <input class="form-control" type="file" name="res-img">
                             </div>
                         </div>
-                        <div class="col-12">
-                            <h4 style="padding-top: 10px;">รายการอาหาร</h4>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="table_not_pagination" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr style="text-align: center;">
-                                            <th width="10%">ลำดับ</th>
-                                            <th width="15%">รูปภาพ</th>
-                                            <th width="10%">ประเภท</th>
-                                            <th width="25%">ชื่ออาหาร</th>
-                                            <th width="10%">สถานะ</th>
-                                            <th width="30%">จัดการ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr style="text-align: center;">
-                                            <td>1</td>
-                                            <td>123.jpg</td>
-                                            <td>ปิ้ง</td>
-                                            <td>ไส้อั่ว</td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="">แผนที่</label>
+                                    <textarea type="text" class="form-control" rows="4" name="res-map"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label class="form-label">รูปพื้นหลัง</label>
+                                    <input class="form-control" type="file" name="res-bg">
+                                </div>
                             </div>
                         </div>
+                        
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 col-12">
-                            <div class="form-group">
-                                <label for="">แผนที่</label>
-                                <input type="text" class="form-control" name="res-map">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <div class="form-group">
-                                <label class="form-label">รูปพื้นหลัง</label>
-                                <input class="form-control" type="file" name="res-bg">
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="row">
                         <div class="col-12">
                             <center>

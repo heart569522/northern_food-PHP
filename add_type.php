@@ -58,10 +58,39 @@ if ($_SESSION['admin_login'] == "") {
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php } ?>
-
-        <!-- DataTales Example -->
+  
         <div class="card shadow mb-4">
             <div class="card-body">
+                <div class="col-md-5 col-sm-10 col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered" id="table_not_pagination" width="100%" cellspacing="0">
+                        <thead class="thead-dark">
+                            <tr style="text-align: center;">
+                                <th width="10%">ลำดับ</th>
+                                <th width="90%">รูปภาพ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                include_once('./admin_page/model/connection.php');
+
+                                $row = 1;
+                                $food = $db->prepare('SELECT * from nf_type');
+                                $food->execute();
+                                while ($data = $food->fetch(PDO::FETCH_ASSOC)){
+                            ?>
+                                    <tr height="50px" style="text-align: center;">
+                                        <td class="align-middle"><?php echo $row; ?></td>
+                                        <td class="align-middle"><?php echo $data["type_name"]; ?></td>
+                                    </tr>
+                            <?php
+                                $row++;
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6">

@@ -29,6 +29,8 @@
             "autoWidth": false,
             "ordering": false,
             "searching": true,
+            pageLength : 5,
+            lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']]
             });
             $('#table_pagination').DataTable({
             "paging": true,
@@ -43,7 +45,7 @@
             "autoWidth": true,
             "ordering": true,
             "searching": false,
-            "bInfo" : false
+            "bInfo" : false,
             });
         });
     </script>

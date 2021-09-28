@@ -29,7 +29,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Type Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i style="color: #FF8000;" class="fas fa-indent"></i>
                     <span style="color: #FF8000;">ประเภท</span>
@@ -41,7 +41,7 @@
                         <a class="collapse-item" href="#">นึ่ง</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Edit Collapse Menu -->
             <li class="nav-item">
