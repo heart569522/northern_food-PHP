@@ -1,15 +1,31 @@
+<?php
+
+if (isset($_REQUEST['id'])) {
+    try {
+        $id = $_REQUEST['id'];
+        $select_stmt = $db->prepare('SELECT * FROM nf_admin WHERE id = :id');
+        $select_stmt->bindParam(":id", $id);
+        $select_stmt->execute();
+        $data = $select_stmt->fetch(PDO::FETCH_ASSOC);
+        extract($data);
+    } catch(PDOException $e) {
+        $e->getMessage();
+    }
+}
+
+?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
 <!-- Page Heading -->
 <div class="row">
     <div class="col-6">
-        <h1 class="h3 mb-2 text-gray">รายการอาหาร</h1>
+        <h1 class="h3 mb-2 text-gray">ผู้ดูแลระบบ : <?php echo $data['username'] ?></h1>
     </div>
-    <div class="col-6">
+    <!-- <div class="col-6">
         <a style="float: right;" href="./add_type.php" class="btn btn-primary" >เพิ่มประเภท</a>
         <a style="float: right;" href="./add_food.php" class="btn btn-success" >เพิ่มเมนู</a>
-    </div>
+    </div> -->
 </div>
 
 <br>
@@ -20,14 +36,12 @@
     </div> -->
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover table-bordered" id="table_pagination_search_order" width="100%" cellspacing="0">
+            <table class="table table-hover table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead class="thead-dark">
                     <tr style="text-align: center;">
-                        <th width="5%">ลำดับ</th>
-                        <th width="10%">รูปภาพ</th>
-                        <th width="25%">ชื่ออาหาร</th>
-                        <th width="10%">ประเภท</th>
-                        <th width="35%">คำอธิบาย</th>
+                        <th width="10%">ลำดับ</th>
+                        <th width="25%">ชื่อผู้ใช้</th>
+                        <th width="45%">Email</th>
                         <th width="20%">จัดการ</th>
                     </tr>
                 </thead>
@@ -36,20 +50,25 @@
                         // include_once('./admin_page/model/connection.php');
 
                         $row = 1;
-                        $food = $db->prepare('SELECT * from nf_food JOIN nf_type ON nf_food.type_id = nf_type.type_id');
-                        $food->execute();
-                        while ($data = $food->fetch(PDO::FETCH_ASSOC)){
+
+                        $admin = $db->prepare('SELECT * from nf_admin');
+                        $admin->execute();
+                        
+                        while ($datas = $admin->fetch(PDO::FETCH_ASSOC)){
                     ?>
-                            <tr height="150px" style="text-align: center;">
+                            <tr height="60px" style="text-align: center;">
                                 <td class="align-middle"><?php echo $row; ?></td>
-                                <td class="align-middle"><img src="upload/food/img/<?php echo $data['food_img']; ?>" width="100%" height="100%" alt=""></td>
-                                <td class="align-middle"><?php echo $data["food_name"]; ?></td>
-                                <td class="align-middle"><?php echo $data["type_name"]; ?></td>
-                                <td class="align-middle"><?php echo $data["food_desc"]; ?></td>
+                                <td class="align-middle"><?php echo $datas["username"]; ?></td>
+                                <td class="align-middle"><?php echo $datas["email"]; ?></td>
                                 <td class="align-middle">
                                     <div class="btn-group" role="group">
-                                        <a href="edit_food.php?update_id=<?php echo $data['food_id']; ?>" class="btn btn-warning">แก้ไข</a>
-                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">ลบเมนู</button>
+                                        <?php if($id === $datas['id']) { ?>
+                                            <a href="edit_admin.php?update_id=<?php echo $id; ?>" class="btn btn-warning">แก้ไข</a>
+                                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">ลบเมนู</button>
+                                        <?php } else { ?>
+                                            <button type="button" class="btn btn-warning" disabled>แก้ไข</button>
+                                            <button type="button" class="btn btn-secondary" disabled>ลบเมนู</button>
+                                        <?php } ?>
                                     </div>
                                         <!-- Modal -->
                                     <div class="modal fade" id="myModal" role="dialog">
@@ -63,9 +82,10 @@
                                             </div>
                                             <div class="modal-body">
                                                 <h4>ยืนยันการลบข้อมูล...</h4>
+                                                <p>เมื่อลบข้อมูลแล้วจะทำการออกจากระบบ</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="del_food.php?delete_id=<?php echo $data['food_id']; ?>" class="btn btn-danger">ลบ</a>
+                                                <a href="del_admin.php?delete_id=<?php echo $id ?>" class="btn btn-danger">ลบ</a>
                                                 <!-- <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button> -->
                                             </div>
                                         </div>

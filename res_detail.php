@@ -7,14 +7,14 @@ include_once('./admin_page/model/connection.php');
 if (isset($_REQUEST['res_id'])) {
     try {
         $id = $_REQUEST['res_id'];
-        // $select_stmt = $db->prepare('SELECT * FROM nf_food WHERE food_id = :id');
-        $select_stmt = $db->prepare("SELECT * FROM nf_food_res 
+        $select_stmt = $db->prepare("SELECT DISTINCT * FROM nf_food_res 
                                      JOIN nf_food ON nf_food_res.food_id = nf_food.food_id
                                      JOIN nf_res ON nf_food_res.res_id = nf_res.res_id
                                      WHERE nf_food_res.res_id = :id");
         $select_stmt->bindParam(":id", $id);
         $select_stmt->execute();
         $data = $select_stmt->fetch(PDO::FETCH_ASSOC);
+        extract($data);
     } catch (PDOException $e) {
         $e->getMessage();
     }
@@ -59,7 +59,10 @@ if (isset($_REQUEST['res_id'])) {
                 <div style="background-color: rgba(255, 255, 255, 1);" class="px-4 py-4 text-center">
                     <div class="container">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
-                            <?php foreach ($data as $row) { ?>
+                            <?php 
+                                $select_stmt->execute();
+                                while ($data = $select_stmt->fetch(PDO::FETCH_ASSOC)){
+                            ?>
                                 <a href="food_detail.php?food_id=<?php echo $data['food_id']; ?>" target="_blank" class="card-hover">
                                     <div class="col">
                                         <div class="card shadow-sm hover-zoom">

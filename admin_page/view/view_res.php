@@ -25,7 +25,8 @@
                         <tr style="text-align: center;">
                             <th width="5%">ลำดับ</th>
                             <th width="10%">รูปภาพ</th>
-                            <th width="65%">ชื่อร้าน</th>
+                            <th width="30%">ชื่อร้าน</th>
+                            <th width="35%">คำอธิบายร้าน</th>
                             <th width="20%">จัดการ</th>
                         </tr>
                     </thead>
@@ -42,6 +43,7 @@
                                 <td class="align-middle"><?php echo $row; ?></td>
                                 <td class="align-middle"><img src="upload/res/img/<?php echo $data['res_img']; ?>" width="100%" height="100%" alt=""></td>
                                 <td class="align-middle"><?php echo $data["res_name"]; ?></td>
+                                <td class="align-middle"><?php echo $data["res_desc"]; ?></td>
                                 <td class="align-middle">
                                     <div class="btn-group" role="group">
                                         <a href="add_food-res.php?res_id=<?php echo $data['res_id']; ?>" class="btn btn-primary">เพิ่มเมนูในร้าน</a>

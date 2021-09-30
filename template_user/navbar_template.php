@@ -20,7 +20,7 @@
 <body>
     <nav id="page-top" class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
     <div class="container-fluid">
-        <a class="navbar-brand" href="./index.php"><b>Nothern Food</b></a>
+        <a class="navbar-brand" href="./index.php"><b>Northern Food</b></a>
         <button class="navbar-toggler p-0 border-0" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
                 aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

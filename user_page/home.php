@@ -23,7 +23,7 @@
 
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1 class="title-center">Nothern Food</h1>
+                        <h1 class="title-center">Northern Food</h1>
                         <p>อาหารเหนือเชียงใหม่ที่คุณควรลิ้มลองชิมแล้วจะติดใจ</p>
                         <!-- <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p> -->
                     </div>
@@ -35,7 +35,7 @@
 
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1 class="title-center">Nothern Food</h1>
+                        <h1 class="title-center">Northern Food</h1>
                         <p>อาหารเหนือเชียงใหม่ที่คุณควรลิ้มลองชิมแล้วจะติดใจ</p>
                         <!-- <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p> -->
                     </div>
@@ -47,7 +47,7 @@
 
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1 class="title-center">Nothern Food</h1>
+                        <h1 class="title-center">Northern Food</h1>
                         <p>อาหารเหนือเชียงใหม่ที่คุณควรลิ้มลองชิมแล้วจะติดใจ</p>
                         <!-- <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p> -->
                     </div>

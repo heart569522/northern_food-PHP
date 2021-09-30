@@ -130,10 +130,48 @@ if ($_SESSION['admin_login'] == "") {
                                             <?php } ?>
                                         </select>
                                     </div>
+                                </div>     
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4 style="padding-top: 10px;">รายการอาหาร</h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="table_not_pagination" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr style="text-align: center;">
+                                                    <th width="5%">ลำดับ</th>
+                                                    <th width="10%">รูปภาพ</th>
+                                                    <th width="40%">ชื่ออาหาร</th>
+                                                    <!-- <th width="15%">ประเภท</th> -->
+                                                    <th width="30%">จัดการ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                                    $row = 1;
+                                                    $food = $db->prepare("SELECT * FROM nf_food_res 
+                                                                            JOIN nf_food ON nf_food_res.food_id = nf_food.food_id
+                                                                            JOIN nf_res ON nf_food_res.res_id = nf_res.res_id
+                                                                            WHERE nf_food_res.res_id = '$r_id'");
+                                                    $food->execute();
+                                                    while ($data = $food->fetch(PDO::FETCH_ASSOC)){
+                                                ?>
+                                                    <tr height="75px" style="text-align: center;">
+                                                        <td class="align-middle"><?php echo $row; ?></td>
+                                                        <td class="align-middle"><img src="upload/food/img/<?php echo $data['food_img']; ?>" width="100%" height="100%" alt=""></td>
+                                                        <td class="align-middle"><?php echo $data["food_name"]; ?></td>
+                                                        <!-- <td class="align-middle"><?php echo $data["type_name"]; ?></td> -->
+                                                        <td class="align-middle"><a href="edit_food.php?update_id=<?php echo $data['food_id']; ?>" class="btn btn-warning">แก้ไข<a></td>
+                                                    </tr>
+                                                <?php
+                                                    $row++;
+                                                    }
+                                                
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <?php for ($i=1; $i<=6; $i++) { ?>
-                                    
-                                <?php } ?>        
                             </div>
                             <div class="row">
                                 <div class="col-12">
