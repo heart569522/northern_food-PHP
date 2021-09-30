@@ -14,14 +14,13 @@ if (isset($_REQUEST['food_id'])) {
         $select_stmt->bindParam(":id", $id);
         $select_stmt->execute();
         $data = $select_stmt->fetch(PDO::FETCH_ASSOC);
-        // extract($data);
-
+        extract($data);
     } catch (PDOException $e) {
         $e->getMessage();
     }
 }
 
-$food = $db->prepare('SELECT * from nf_food ORDER BY RAND() LIMIT 2');
+$food = $db->prepare('SELECT * from nf_food ORDER BY RAND() LIMIT 3');
 $food->execute();
 $food_row = $food->fetchAll();
 
@@ -53,10 +52,26 @@ $food_row = $food->fetchAll();
                                 <img class="img-fluid" src="upload/food/img/<?php echo $data['food_img'] ?>" width="100%" height="440">
                             </div>
                             <div class="col-5">
-                                <?php foreach ($food_row as $row) { ?>
-                                    <figure class="figure-detail-list"><img class="img-fluid" src="upload/food/img/<?php echo $row['food_img'] ?>" width="100%" height="220"></figure>
-
-                                <?php } ?>
+                                <?php
+                                // if ($id != $food_row['food_id']) {
+                                foreach ($food_row as $row) {
+                                ?>
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="upload/food/img/<?php echo $row['food_img'] ?>" class="img-fluid rounded-start" alt="...">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h4 class="card-title"><?php echo $row['food_name'] ?></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                // }
+                                ?>
                             </div>
                         </div>
                         <div class="row">
@@ -73,7 +88,14 @@ $food_row = $food->fetchAll();
                             </div>
                             <div class="col-6" style="padding-top: 10px; color:#000;">
                                 <h3 class="mb-4" style="text-align: right;"><b>แผนที่</b><br>
-                                    <?php echo $data['res_map']; ?>
+                                    <?php
+                                    // $select_stmt->execute();
+                                    // while ($data = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                    <div id="div-map"></div><br>
+                                    <?php
+                                    // }
+                                    ?>
                                 </h3>
                             </div>
                         </div>
@@ -87,13 +109,29 @@ $food_row = $food->fetchAll();
                                     $select_stmt->execute();
                                     while ($data = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
-                                        <?php echo $data['res_name']; ?><br>
+                                        <a class="btn btn-outline-dark" onclick="showMap();"><?php echo $data['res_name']; ?><br></a>
                                     <?php
                                     }
                                     ?>
                                 </h3>
                             </div>
                         </div>
+                        <script>
+                            document.getElementById("div-map").onclick = function() {
+
+                                var ok = true;
+
+                                if (ok === true) {
+                                    var div = document.createElement('div');
+                                    div.style.backgroundColor = "black";
+                                    div.style.position = "absolute";
+                                    div.style.left = "50px";
+                                    div.style.top = "50px";
+
+                                    document.getElementsByTagName('body')[0].appendChild(div); // add it to any dom element you want
+                                }
+                            };
+                        </script>
                     </div>
                 </div>
             </div>
