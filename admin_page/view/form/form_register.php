@@ -141,7 +141,7 @@
                                 <button type="submit" class="btn-h btn-blue-dark btn-block" name="btn_regis" id="submit">
                                     Submit
                                 </button>
-                                <button type="submit" class="btn-h btn-danger btn-block" name="btn_back" onclick="window.history.go(-1); return false;">
+                                <button type="button" class="btn-h btn-danger btn-block" name="btn_back" onclick="window.history.go(-1); return false;">
                                     Cancel
                                 </button>
                             </form>

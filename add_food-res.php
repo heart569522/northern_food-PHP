@@ -167,7 +167,7 @@ if ($_SESSION['admin_login'] == "") {
                                     <center>
                                         <div class="form-group" style="padding-top: 20px;">
                                             <button type="submit" name="insert-res-food" class="btn btn-success">บันทึก</button>
-                                            <button type="reset" class="btn btn-danger">ยกเลิก</button>
+                                            <button type="reset" class="btn btn-danger" onclick="window.history.go(-1); return false;">ยกเลิก</button>
                                         </div>
                                     </center>
                                 </div>
