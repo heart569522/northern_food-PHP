@@ -77,8 +77,7 @@ if ($_SESSION['admin_login'] == "") {
                                                 <a href="edit_admin.php?update_id=<?php echo $id; ?>" class="btn btn-warning">แก้ไข</a>
                                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">ลบ</button>
                                             <?php } else { ?>
-                                                <button type="button" class="btn btn-warning" disabled>แก้ไข</button>
-                                                <button type="button" class="btn btn-secondary" disabled>ลบ</button>
+                                                <button type="button" class="btn btn-secondary" disabled><i class="fas fa-lock"></i></button>
                                             <?php } ?>
                                         </div>
                                         <!-- Modal -->
