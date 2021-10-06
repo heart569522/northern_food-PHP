@@ -67,7 +67,7 @@ if ($_SESSION['admin_login'] == "") {
                         <thead class="thead-dark">
                             <tr style="text-align: center;">
                                 <th width="10%">ลำดับ</th>
-                                <th width="90%">รูปภาพ</th>
+                                <th width="90%">ประเภท</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,7 +96,7 @@ if ($_SESSION['admin_login'] == "") {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">ประเภท</label>
-                                <input type="text" class="form-control" name="food-type-name">
+                                <input type="text" class="form-control" name="food-type-name" required>
                             </div>
                         </div>
                     </div>

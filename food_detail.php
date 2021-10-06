@@ -44,7 +44,7 @@ $food_row = $food->fetchAll();
         <div class="row">
             <div class="col-12">
                 <div style="background-color: rgba(255, 255, 255, 0.6);" class="px-4 py-4 text-center">
-                    <h1 class="display-5 fw-bold"><?php echo $data['food_name']; ?></h1>
+                    <h1 style="color: #000;" class="display-5 fw-bold"><?php echo $data['food_name']; ?></h1>
                     <div class="container">
                         <div class="row">
                             <div class="col-7">
@@ -52,22 +52,25 @@ $food_row = $food->fetchAll();
                                 <img class="img-fluid" src="upload/food/img/<?php echo $data['food_img'] ?>" width="100%" height="440">
                             </div>
                             <div class="col-5">
+                                <h2 style="color: #000;">เมนูแนะนำ</h2>
                                 <?php
                                 // if ($id != $food_row['food_id']) {
                                 foreach ($food_row as $row) {
                                 ?>
-                                    <div class="card mb-3" style="max-width: 540px;">
-                                        <div class="row g-0">
-                                            <div class="col-md-4">
-                                                <img src="upload/food/img/<?php echo $row['food_img'] ?>" class="img-fluid rounded-start" alt="...">
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h4 class="card-title"><?php echo $row['food_name'] ?></h4>
+                                    <a style="text-decoration: none; color: #000;" href="food_detail.php?food_id=<?php echo $row['food_id']; ?>">
+                                        <div class="card mb-3" style="max-width: 540px;">
+                                            <div class="row g-0">
+                                                <div class="col-md-4">
+                                                    <img src="upload/food/img/<?php echo $row['food_img'] ?>" class="img-fluid rounded-start" alt="...">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <h4><?php echo $row['food_name'] ?></h4>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 <?php
                                 }
                                 // }
@@ -87,55 +90,45 @@ $food_row = $food->fetchAll();
                                 <h3 class="mb-4" style="text-align: left;"><b>วัตถุดิบ/ส่วนผสม</b><br><?php echo $data['food_ingredients']; ?></h3>
                             </div>
                             <div class="col-6" style="padding-top: 10px; color:#000;">
-                                <h3 class="mb-4" style="text-align: right;"><b>แผนที่</b><br>
-                                    <?php
-                                    // $select_stmt->execute();
-                                    // while ($data = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
-                                    ?>
-                                    <div id="div-map"></div><br>
-                                    <?php
-                                    // }
-                                    ?>
-                                </h3>
+                                <h3 class="mb-4" style="text-align: right;"><b>เครื่องเคียง/เครื่องแกง</b><br><?php echo $data['food_spices']; ?></h3>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6" style="padding-top: 10px; color:#000;">
-                                <h3 class="mb-4" style="text-align: left;"><b>เครื่องเคียง/เครื่องแกง</b><br><?php echo $data['food_spices']; ?></h3>
-                            </div>
-                            <div class="col-6" style="padding-top: 10px; color:#000;">
-                                <h3 class="mb-4" style="text-align: right;"><b>รายชื่อร้านอาหารในเชียงใหม่</b><br>
-                                    <?php
-                                    $select_stmt->execute();
-                                    while ($data = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
-                                    ?>
-                                        <a class="btn btn-outline-dark" onclick="showMap();"><?php echo $data['res_name']; ?><br></a>
-                                    <?php
-                                    }
-                                    ?>
-                                </h3>
-                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div style="background-color: rgba(255, 255, 255, 0.9);" class="px-4 py-4 text-center">
+                    <div class="container">
+                        <div class="col-12" style="padding-top: 10px; color:#000;">
+                            <h3 class="mb-4" style="text-align: left;"><b>ร้านอาหาร</b></h3>
                         </div>
-                        <script>
-                            document.getElementById("div-map").onclick = function() {
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
+                            <?php
+                            $select_stmt->execute();
+                            while ($data = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <a href="res_detail.php?res_id=<?php echo $data['res_id']; ?>" class="card-hover">
+                                    <div class="col">
+                                        <div class="card shadow-sm hover-zoom">
+                                            <figure class="figure-list"><img class="img-fluid " src="upload/res/img/<?php echo $data['res_img'] ?>" width="100%"></figure>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                <h2 style="text-align: center;"><?php echo $data['res_name'] ?></h2>
+                                                </p>
+                                                <div class="d-flex justify-content-between align-items-center">
 
-                                var ok = true;
-
-                                if (ok === true) {
-                                    var div = document.createElement('div');
-                                    div.style.backgroundColor = "black";
-                                    div.style.position = "absolute";
-                                    div.style.left = "50px";
-                                    div.style.top = "50px";
-
-                                    document.getElementsByTagName('body')[0].appendChild(div); // add it to any dom element you want
-                                }
-                            };
-                        </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
 

@@ -114,16 +114,16 @@ if ($_SESSION['admin_login'] == "") {
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-lg-3 col-md-6">
                             <div class="form-group">
                                 <label for="">ชื่อ</label>
-                                <input type="text" class="form-control" name="food-name">
+                                <input type="text" class="form-control" name="food-name" required>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-lg-3 col-md-6">
                             <div class="form-group">
                                 <label for="">ประเภท</label>
-                                <select class="form-select" name="food-type">
+                                <select class="form-select" name="food-type" required>
                                     <option disabled>ประเภทอาหาร</option>
                                     <?php foreach ($data as $row) { ?>
                                         <option value="<?php echo $row["type_id"]; ?>">
@@ -133,36 +133,45 @@ if ($_SESSION['admin_login'] == "") {
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="">ส่วนผสม</label>
-                                <textarea type="text" class="form-control" rows="4" name="food-ingredients"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="">เครื่องเคียง/เครื่องแกง</label>
-                                <textarea type="text" class="form-control" rows="4" name="food-spices"></textarea>
-                            </div>
+                        <div class="col-lg-3 col-md-6">
                             <div class="form-group">
                                 <label class="form-label">รูปอาหาร</label>
-                                <input class="form-control" type="file" name="food-img">
-                            </div>
-                            <div class="form-group">
-                                <label for="">คำบรรยาย</label>
-                                <textarea type="text" class="form-control" rows="4" name="food-desc"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">รูปพื้นหลัง</label>
-                                <input class="form-control" type="file" name="food-bg">
+                                <input class="form-control" type="file" name="food-img" accept="image/png, image/jpeg, image/jpg, image/gif" required>
                             </div>
                         </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">รูปพื้นหลัง</label>
+                                <input class="form-control" type="file" name="food-bg" accept="image/png, image/jpeg, image/jpg, image/gif" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="form-group">
+                                <label for="">ส่วนผสม</label>
+                                <textarea type="text" class="form-control" rows="6" name="food-ingredients" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="form-group">
+                                <label for="">เครื่องเคียง/เครื่องแกง</label>
+                                <textarea type="text" class="form-control" rows="6" name="food-spices" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="form-group">
+                                <label for="">คำบรรยาย</label>
+                                <textarea type="text" class="form-control" rows="6" name="food-desc" required></textarea>
+                            </div>
+                        </div>
+                    </div>
                         
                         <div class="col-12">
                             <center>
                                 <div class="form-group" style="padding-top: 10px;">
                                     <button type="submit" name="insert_food" class="btn btn-success">บันทึก</button>
-                                    <button type="reset" class="btn btn-danger">ยกเลิก</button>
+                                    <button type="reset" class="btn btn-danger" onclick="window.history.go(-1); return false;">ยกเลิก</button>
                                 </div>
                             </center>
                         </div>

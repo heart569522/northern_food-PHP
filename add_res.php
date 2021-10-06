@@ -98,37 +98,37 @@ if ($_SESSION['admin_login'] == "") {
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="row">
-                        <div class="col-xl-4 col-md-6 col-12">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="">ชื่อร้านค้า</label>
-                                <input type="text" class="form-control" name="res-name">
+                                <input type="text" class="form-control" name="res-name" required>
                             </div>
                             <div class="form-group">
                                 <label for="">คำอธิบายร้านค้า</label>
-                                <input type="text" class="form-control" name="res-desc">
+                                <textarea type="text" class="form-control" rows="4" name="res-desc" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label">รูปพื้นหลัง</label>
+                                <input class="form-control" type="file" name="res-bg" accept="image/png, image/jpeg, image/jpg, image/gif" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">รูปร้านอาหาร</label>
-                                <input class="form-control" type="file" name="res-img">
+                                <input class="form-control" type="file" name="res-img" accept="image/png, image/jpeg, image/jpg, image/gif" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-12">
+                            <div class="col-12">
                                 <div class="form-group">
                                     <label for="">แผนที่</label>
-                                    <textarea type="text" class="form-control" rows="4" name="res-map"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label class="form-label">รูปพื้นหลัง</label>
-                                    <input class="form-control" type="file" name="res-bg">
+                                    <p class="small">(เลือกสถานที่ใน Google Map -> กดแชร์ -> ฝังแผนที่ -> เลือกแผนที่ขนาดเล็กหรือปานกลาง -> คัดลอก HTML)</p>
+                                    <textarea type="text" class="form-control" rows="4" name="res-map" required></textarea>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-12">
                             <center>

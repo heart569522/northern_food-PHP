@@ -1,13 +1,13 @@
 <?php
-    include_once('./admin_page/model/connection.php');
+include_once('./admin_page/model/connection.php');
 
-    $food = $db->prepare('SELECT * from nf_food ORDER BY RAND() LIMIT 4');
-    $food->execute();
-    $food_row = $food->fetchAll();
+$food = $db->prepare('SELECT * from nf_food ORDER BY RAND() LIMIT 4');
+$food->execute();
+$food_row = $food->fetchAll();
 
-    $res = $db->prepare('SELECT * from nf_res ORDER BY RAND() LIMIT 4');
-    $res->execute();
-    $res_row = $res->fetchAll();
+$res = $db->prepare('SELECT * from nf_res ORDER BY RAND() LIMIT 4');
+$res->execute();
+$res_row = $res->fetchAll();
 ?>
 <main>
     <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -82,63 +82,67 @@
             <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
 
-                <?php foreach ($food_row as $row) { ?>
-                    <a href="food_detail.php?food_id=<?php echo $row['food_id']; ?>" target="_blank" class="card-hover">
-                        <div class="col">
-                            <div class="card shadow-sm hover-zoom">
-                                <figure class="figure-home"><img class="img-fluid" src="upload/food/img/<?php echo $row['food_img'] ?>" width="100%"></figure>
-                                <div class="card-body">
-                                    <p class="card-text"><h2 style="text-align: center;"><?php echo $row['food_name'] ?></h2></p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                <?php } ?>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-                 
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">ร้านค้าแนะนำ</h1>
-                    <!-- <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-                    <p>
-                        <a href="#" class="btn btn-primary my-2">Main call to action</a>
-                        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-                    </p> -->
-                </div>
-            </div>
-        </section>
-
-
-        <div class="bg2-column">               
-            <div class="album py-5">
-                <div class="container">
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
-
-                    <?php foreach ($res_row as $row) { ?>
-                        <a href="res_detail.php?res_id=<?php echo $row['res_id']; ?>" target="_blank" class="card-hover">
+                    <?php foreach ($food_row as $row) { ?>
+                        <a href="food_detail.php?food_id=<?php echo $row['food_id']; ?>" class="card-hover">
                             <div class="col">
                                 <div class="card shadow-sm hover-zoom">
-                                    <figure class="figure-home"><img class="img-fluid " src="upload/res/img/<?php echo $row['res_img'] ?>" width="100%"></figure>
+                                    <figure class="figure-home"><img class="img-fluid" src="upload/food/img/<?php echo $row['food_img'] ?>" width="100%"></figure>
                                     <div class="card-body">
-                                        <p class="card-text"><h2 style="text-align: center;"><?php echo $row['res_name'] ?></h2></p>
+                                        <p class="card-text">
+                                        <h2 style="text-align: center;"><?php echo $row['food_name'] ?></h2>
+                                        </p>
                                         <div class="d-flex justify-content-between align-items-center">
-                    
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     <?php } ?>
-                
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">ร้านค้าแนะนำ</h1>
+                <!-- <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+                    <p>
+                        <a href="#" class="btn btn-primary my-2">Main call to action</a>
+                        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+                    </p> -->
+            </div>
+        </div>
+    </section>
+
+
+    <div class="bg2-column">
+        <div class="album py-5">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
+
+                    <?php foreach ($res_row as $row) { ?>
+                        <a href="res_detail.php?res_id=<?php echo $row['res_id']; ?>" class="card-hover">
+                            <div class="col">
+                                <div class="card shadow-sm hover-zoom">
+                                    <figure class="figure-home"><img class="img-fluid " src="upload/res/img/<?php echo $row['res_img'] ?>" width="100%"></figure>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                        <h2 style="text-align: center;"><?php echo $row['res_name'] ?></h2>
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    <?php } ?>
+
                 </div>
             </div>
         </div>

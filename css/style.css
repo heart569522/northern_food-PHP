@@ -129,6 +129,16 @@
 	-webkit-transform: scale(1.1);
 	transform: scale(1.1);
 }
+.hover-type {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.hover-type :hover{
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
 
 .bg1-column {
     position: relative;

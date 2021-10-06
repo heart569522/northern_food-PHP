@@ -98,7 +98,7 @@
                     <div class="col-md-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4 font-weight-bold">Sign up</h1>
+                                <h1 class="h4 text-gray-900 mb-4 font-weight-bold">ADMIN | Register</h1>
                             </div>
                             <form class="user" method="POST">
                                 <?php 
@@ -125,7 +125,7 @@
                                     }
                                 ?>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="username" id="username" placeholder="Username" onblur="checkusername(this.value)" >
+                                    <input type="text" class="form-control" name="username" id="username" placeholder="Username" >
                                     <span id="usernameavailable"></span>
                                 </div>
                                 <div class="form-group">
@@ -137,17 +137,21 @@
                                 <div class="form-group">    
                                     <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm Password" >
                                 </div>
+                                <hr>
                                 <button type="submit" class="btn-h btn-blue-dark btn-block" name="btn_regis" id="submit">
                                     Submit
                                 </button>
+                                <button type="submit" class="btn-h btn-danger btn-block" name="btn_back" onclick="window.history.go(-1); return false;">
+                                    Cancel
+                                </button>
                             </form>
-                            <hr>
+                            <!-- <hr>
                             <div class="text-center">
                                 <a class="small" href="forgot-password.php">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
+                            </div> -->
+                            <!-- <div class="text-center">
                                 <a class="small" href="signin.php">Already have an account? Login!</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -158,15 +162,3 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        function checkusername(val) {
-            $.ajax({
-                type: 'POST',
-                url: '../../model/checkuser_available.php',
-                data: 'username='+val,
-                success: function(data) {
-                    $('#username_available').html(data);
-                }
-            });
-        }
-    </script>

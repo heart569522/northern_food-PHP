@@ -22,7 +22,7 @@ if ($_SESSION['admin_login'] == "") {
             $select_stmt->execute();
             $data = $select_stmt->fetch(PDO::FETCH_ASSOC);
             extract($data);
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             $e->getMessage();
         }
     }
@@ -32,7 +32,7 @@ if ($_SESSION['admin_login'] == "") {
             $r_name = $_REQUEST['res-name'];
             $r_map = $_REQUEST['res-map'];
             $r_desc = $_REQUEST['res-desc'];
-            
+
             $img_file = $_FILES['res-img']['name'];
             $img_type = $_FILES['res-img']['type'];
             $img_size = $_FILES['res-img']['size'];
@@ -63,8 +63,8 @@ if ($_SESSION['admin_login'] == "") {
                 if ($img_type == "image/jpg" || $img_type == 'image/jpeg' || $img_type == "image/png" || $img_type == "image/gif" && $bg_type == "image/jpg" || $bg_type == 'image/jpeg' || $bg_type == "image/png" || $bg_type == "image/gif") {
                     if (!file_exists($img_path && $bg_path)) { // check file not exist in your upload folder path
                         if ($img_size && $bg_size < 5000000) { // check file size 5MB
-                            unlink($img_directory.$data['res_img']);
-                            unlink($bg_directory.$data['res_bg']);
+                            unlink($img_directory . $data['res_img']);
+                            unlink($bg_directory . $data['res_bg']);
                             move_uploaded_file($img_temp, 'upload/res/img/' . $img_file); // move upload file temperory directory to your upload folder
                             move_uploaded_file($bg_temp, 'upload/res/bg/' . $bg_file);
                         } else {
@@ -103,7 +103,6 @@ if ($_SESSION['admin_login'] == "") {
             } else {
                 $errorMsg = "ERORR";
             }
-
         } catch (PDOException $e) {
             $e->getMessage();
         }
@@ -141,45 +140,49 @@ if ($_SESSION['admin_login'] == "") {
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="row">
-                        <div class="col-xl-4 col-md-6 col-12">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="">ชื่อร้านค้า</label>
-                                <input type="text" class="form-control" name="res-name" value="<?php echo $data["res_name"]; ?>">
+                                <input type="text" class="form-control" name="res-name" value="<?php echo $data["res_name"]; ?>" required>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6 col-12">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="">คำอธิบายร้านค้า</label>
-                                <input type="text" class="form-control" name="res-desc" value="<?php echo $data["res_desc"]; ?>">
+                                <textarea type="text" class="form-control" rows="4" name="res-desc" required><?php echo $data["res_desc"]; ?></textarea>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6 col-12">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label">รูปร้านอาหาร</label>
+                                <p>
+                                    <img src="upload/res/img/<?php echo $data["res_img"]; ?>" height="100" width="150" alt="">
+                                </p>
+                                <input class="form-control" type="file" name="res-img" value="<?php echo $data["res_img"]; ?>" accept="image/png, image/jpeg, image/jpg, image/gif">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label">รูปพื้นหลัง</label>
+                                <p>
+                                    <img src="upload/res/bg/<?php echo $data["res_bg"]; ?>" height="100" width="150" alt="">
+                                </p>
+                                <input class="form-control" type="file" name="res-bg" value="<?php echo $data["res_bg"]; ?>" accept="image/png, image/jpeg, image/jpg, image/gif">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label for="">แผนที่</label>
-                                <textarea type="text" class="form-control" rows="4" name="res-map"><?php echo $data["res_map"]; ?></textarea>
+                                <p class="small">(เลือกสถานที่ใน Google Map -> กดแชร์ -> ฝังแผนที่ -> เลือกแผนที่ขนาดเล็กหรือปานกลาง -> คัดลอก HTML)</p>
+                                <textarea type="text" class="form-control" rows="4" name="res-map" required><?php echo $data["res_map"]; ?></textarea>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label class="form-label">รูปร้านอาหาร</label>
-                                    <p>
-                                        <img src="upload/res/img/<?php echo $data["res_img"]; ?>" height="100" width="150" alt="">
-                                    </p>
-                                    <input class="form-control" type="file" name="res-img" value="<?php echo $data["res_img"]; ?>">
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label class="form-label">รูปพื้นหลัง</label>
-                                    <p>
-                                        <img src="upload/res/bg/<?php echo $data["res_bg"]; ?>" height="100" width="150" alt="">
-                                    </p>
-                                    <input class="form-control" type="file" name="res-bg" value="<?php echo $data["res_bg"]; ?>">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="col-12">
+                    </div>
+                    <!-- <div class="col-12">
                             <h4 style="padding-top: 10px;">รายการอาหาร</h4>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="table_not_pagination" width="100%" cellspacing="0">
@@ -194,14 +197,14 @@ if ($_SESSION['admin_login'] == "") {
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $row = 1;
-                                            $food = $db->prepare
-                                                ('SELECT * from nf_food_res 
+                                        $row = 1;
+                                        $food = $db->prepare(
+                                            'SELECT * from nf_food_res 
                                                   JOIN nf_food ON nf_food_res.food_res_id = nf_food.food_id
                                                   JOIN nf_res ON nf_food_res.food_res_id = nf_res.res_id'
-                                                );
-                                            $food->execute();
-                                            while ($data = $food->fetch(PDO::FETCH_ASSOC)){
+                                        );
+                                        $food->execute();
+                                        while ($data = $food->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
                                              <tr height="75px" style="text-align: center;">
                                                 <td class="align-middle"><?php echo $row; ?></td>
@@ -212,28 +215,28 @@ if ($_SESSION['admin_login'] == "") {
                                             </tr>
                                         <?php
                                             $row++;
-                                            }
-                                        
+                                        }
+
                                         ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div> -->
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-12">
-                            <center>
-                                <div class="form-group" style="padding-top: 20px;">
-                                    <button type="submit" name="update_res" class="btn btn-success">บันทึก</button>
-                                    <button type="reset" class="btn btn-danger">ยกเลิก</button>
-                                </div>
-                            </center>
-                        </div>
-                    </div>
-                </form>
             </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <center>
+                        <div class="form-group" style="padding-top: 20px;">
+                            <button type="submit" name="update_res" class="btn btn-success">บันทึก</button>
+                            <button type="reset" class="btn btn-danger">ยกเลิก</button>
+                        </div>
+                    </center>
+                </div>
+            </div>
+            </form>
         </div>
+    </div>
     </div>
     <!-- /.container-fluid -->
 

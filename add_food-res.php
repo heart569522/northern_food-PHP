@@ -10,7 +10,7 @@ if ($_SESSION['admin_login'] == "") {
     require_once 'template_admin/slidebar_template.php';
     require_once 'template_admin/topbar_template.php';
 
-    $food = $db->prepare('SELECT * from nf_food');
+    $food = $db->prepare('SELECT * from nf_food ORDER BY food_name ASC');
     $food->execute();
     $food_row = $food->fetchAll();
 
@@ -22,7 +22,7 @@ if ($_SESSION['admin_login'] == "") {
             $select_stmt->execute();
             $data = $select_stmt->fetch(PDO::FETCH_ASSOC);
             extract($data);
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             $e->getMessage();
         }
     }
@@ -33,7 +33,7 @@ if ($_SESSION['admin_login'] == "") {
 
             if (empty($f_id)) {
                 $errorMsg = "เลือกเมนู";
-            } 
+            }
             // else if (empty($f_type)) {
             //     $errorMsg = "เลือกประเภท";
             // } else if (empty($f_ingreedients)) {
@@ -54,7 +54,6 @@ if ($_SESSION['admin_login'] == "") {
                     //header('refresh:1; restaurant.php');
                 }
             }
-
         } catch (PDOException $e) {
             $e->getMessage();
         }
@@ -105,23 +104,10 @@ if ($_SESSION['admin_login'] == "") {
                     <div class="col-md-6 col-12">
                         <form action="" method="post">
                             <div class="row">
-                                <!-- <div class="col-xl-4 col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="">เลือกเมนูอาหาร</label>
-                                        <select class="form-select" name="food-type">
-                                            <option disabled selected>เมนู</option>
-                                            <?php foreach ($food_row as $row) { ?>
-                                                <option value="<?php echo $row["food_id"]; ?>">
-                                                    <?php echo $row["food_name"]; ?>
-                                                </option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div> -->
                                 <div class="col-xl-4 col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="">เลือกเมนูอาหาร</label>
-                                        <select class="form-select" name="food-id">
+                                        <select class="form-select" name="food-id" required>
                                             <option disabled selected>เมนู</option>
                                             <?php foreach ($food_row as $row) { ?>
                                                 <option value="<?php echo $row["food_id"]; ?>">
@@ -130,13 +116,13 @@ if ($_SESSION['admin_login'] == "") {
                                             <?php } ?>
                                         </select>
                                     </div>
-                                </div>     
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <h4 style="padding-top: 10px;">รายการอาหาร</h4>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="table_not_pagination" width="100%" cellspacing="0">
+                                        <table class="table table-bordered" id="table_pagination_search_order" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr style="text-align: center;">
                                                     <th width="5%">ลำดับ</th>
@@ -147,26 +133,29 @@ if ($_SESSION['admin_login'] == "") {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php
-                                                    $row = 1;
-                                                    $food = $db->prepare("SELECT * FROM nf_food_res 
+                                                <?php
+                                                $row = 1;
+                                                $food = $db->prepare("SELECT * FROM nf_food_res 
                                                                             JOIN nf_food ON nf_food_res.food_id = nf_food.food_id
                                                                             JOIN nf_res ON nf_food_res.res_id = nf_res.res_id
-                                                                            WHERE nf_food_res.res_id = '$r_id'");
-                                                    $food->execute();
-                                                    while ($data = $food->fetch(PDO::FETCH_ASSOC)){
+                                                                            WHERE nf_food_res.res_id = '$r_id'
+                                                                            ORDER BY food_name ASC");
+                                                $food->execute();
+                                                while ($data = $food->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
                                                     <tr height="75px" style="text-align: center;">
                                                         <td class="align-middle"><?php echo $row; ?></td>
                                                         <td class="align-middle"><img src="upload/food/img/<?php echo $data['food_img']; ?>" width="100%" height="100%" alt=""></td>
                                                         <td class="align-middle"><?php echo $data["food_name"]; ?></td>
                                                         <!-- <td class="align-middle"><?php echo $data["type_name"]; ?></td> -->
-                                                        <td class="align-middle"><a href="edit_food.php?update_id=<?php echo $data['food_id']; ?>" class="btn btn-warning">แก้ไข<a></td>
+                                                        <td class="align-middle">
+                                                            <a href="edit_food.php?update_id=<?php echo $data['food_id']; ?>" class="btn btn-warning">แก้ไข<a>
+                                                                    <a href="del_food-res.php?delete_id=<?php echo $data['food_res_id']; ?>&res_id=<?php echo $r_id; ?>" class="btn btn-danger">ลบ<a>
+                                                        </td>
                                                     </tr>
                                                 <?php
                                                     $row++;
-                                                    }
-                                                
+                                                }
                                                 ?>
                                             </tbody>
                                         </table>
@@ -185,7 +174,7 @@ if ($_SESSION['admin_login'] == "") {
                             </div>
                         </form>
                     </div>
-                </div>                    
+                </div>
             </div>
         </div>
     </div>

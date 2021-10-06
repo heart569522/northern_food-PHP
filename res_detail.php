@@ -49,21 +49,21 @@ if (isset($_REQUEST['res_id'])) {
                             </div>
                             <div class="col-lg-5 col-sm-12 p-3">
                                 <?php echo $data['res_map'] ?>
-                                <p style="text-align: center; color: #000;" class="lead mb-4"><?php echo $data['res_desc'] ?></p>
+                                <p style="text-align: center; color: #000;" class="lead mb-4"><?php echo nl2br($data['res_desc']) ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-12">
-                <div style="background-color: rgba(255, 255, 255, 1);" class="px-4 py-4 text-center">
+                <div style="background-color: rgba(255, 255, 255, 0.9);" class="px-4 py-4 text-center">
                     <div class="container">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
                             <?php 
                                 $select_stmt->execute();
                                 while ($data = $select_stmt->fetch(PDO::FETCH_ASSOC)){
                             ?>
-                                <a href="food_detail.php?food_id=<?php echo $data['food_id']; ?>" target="_blank" class="card-hover">
+                                <a href="food_detail.php?food_id=<?php echo $data['food_id']; ?>" class="card-hover">
                                     <div class="col">
                                         <div class="card shadow-sm hover-zoom">
                                             <figure class="figure-list"><img class="img-fluid " src="upload/food/img/<?php echo $data['food_img'] ?>" width="100%"></figure>

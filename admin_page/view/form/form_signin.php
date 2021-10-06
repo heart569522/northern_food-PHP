@@ -64,7 +64,7 @@ if (isset($_REQUEST['btn_login'])) {
                             <div class="col-md-12">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4 font-weight-bold">Sign in</h1>
+                                        <h1 class="h4 text-gray-900 mb-4 font-weight-bold">ADMIN | Sign in</h1>
                                     </div>
                                     <form class="user" method="POST">
                                     <?php 
@@ -89,22 +89,23 @@ if (isset($_REQUEST['btn_login'])) {
                                         }
                                     ?>
                                         <div class="form-group">
-                                            <input type="text" name="username" id="username" class="form-control" placeholder="Username...">
+                                            <input type="text" name="username" id="username" class="form-control" placeholder="Username..." required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="password" id="password" class="form-control" placeholder="Password...">
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="Password..." required>
                                         </div>
+                                        <hr>
                                         <button type="submit" name="btn_login" class="btn-h btn-blue-dark btn-block">
                                             Submit
                                         </button>
                                     </form>
-                                    <hr>
-                                    <div class="text-center">
+                                    <!-- <hr> -->
+                                    <!-- <div class="text-center">
                                         <a class="small" href="forgot-password.php">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="register.php">Sign Up!</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

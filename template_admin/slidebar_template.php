@@ -53,6 +53,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="./restaurant.php">ร้านค้า</a>
                         <a class="collapse-item" href="./food.php">เมนู</a>
+                        <a class="collapse-item" href="./view_admin.php">ผู้ดูแลระบบ</a>
                     </div>
                 </div>
             </li>

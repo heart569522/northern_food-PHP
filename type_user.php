@@ -1,12 +1,12 @@
 <?php
-require_once 'template_user/head_template.php';
-require_once 'template_user/navbar_template.php';
+    require_once 'template_user/head_template.php';
+    require_once 'template_user/navbar_template.php';
 
-include_once('./admin_page/model/connection.php');
+    include_once('./admin_page/model/connection.php');
 
-$res = $db->prepare('SELECT * from nf_res');
-$res->execute();
-$res_row = $res->fetchAll();
+    $type = $db->prepare('SELECT * from nf_type');
+    $type->execute();
+    $type_row = $type->fetchAll();
 ?>
 <main>
     <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -22,7 +22,7 @@ $res_row = $res->fetchAll();
 
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1 class="title-center">ร้านอาหารเหนือ</h1>
+                        <h1 class="title-center">ประเภทอาหาร</h1>
                         <!-- <p>อาหารเหนือเชียงใหม่ที่คุณควรลิ้มลองชิมแล้วจะติดใจ</p> -->
                         <!-- <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p> -->
                     </div>
@@ -34,7 +34,7 @@ $res_row = $res->fetchAll();
 
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1 class="title-center">ร้านอาหารเหนือ</h1>
+                        <h1 class="title-center">ประเภทอาหาร</h1>
                         <!-- <p>อาหารเหนือเชียงใหม่ที่คุณควรลิ้มลองชิมแล้วจะติดใจ</p> -->
                         <!-- <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p> -->
                     </div>
@@ -46,7 +46,7 @@ $res_row = $res->fetchAll();
 
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1 class="title-center">ร้านอาหารเหนือ</h1>
+                        <h1 class="title-center">ประเภทอาหาร</h1>
                         <!-- <p>อาหารเหนือเชียงใหม่ที่คุณควรลิ้มลองชิมแล้วจะติดใจ</p> -->
                         <!-- <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p> -->
                     </div>
@@ -78,32 +78,30 @@ $res_row = $res->fetchAll();
 
     <div class="album py-5 bg-light">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-3">
 
-                <?php foreach ($res_row as $row) { ?>
-                    <a href="res_detail.php?res_id=<?php echo $row['res_id']; ?>" class="card-hover">
-                        <div class="col">
-                            <div class="card shadow-sm hover-zoom">
-                                <figure class="figure-list"><img class="img-fluid " src="upload/res/img/<?php echo $row['res_img'] ?>" width="100%"></figure>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                    <h2 style="text-align: center;"><?php echo $row['res_name'] ?></h2>
-                                    </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        
-                                    </div>
+            <?php foreach ($type_row as $row) { ?>
+                <a href="type_detail.php?type_id=<?php echo $row['type_id']; ?>" class="card-hover">
+                    <div class="col">
+                        <div class="card shadow-sm hover-zoom">
+                            <!-- <figure class="figure-list"></figure> -->
+                            <div class="card-body hover-type">
+                                <p class="card-text"><h2 style="text-align: center;"><?php echo $row['type_name'] ?></h2></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    
                                 </div>
                             </div>
                         </div>
-                    </a>
-                <?php } ?>
-
+                    </div>
+                </a>
+            <?php } ?>
+            
             </div>
         </div>
     </div>
 
 </main>
 <?php
-require_once 'template_user/script_template.php';
-require_once 'template_user/footer_template.php';
+    require_once 'template_user/script_template.php';
+    require_once 'template_user/footer_template.php';
 ?>

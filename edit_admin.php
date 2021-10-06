@@ -14,9 +14,9 @@ if ($_SESSION['admin_login'] == "") {
     // $type->execute();
     // $type_row = $type->fetchAll();
 
-    if (isset($_REQUEST['update_id'])) {
+    if (isset($_POST['update_id'])) {
         try {
-            $id = $_REQUEST['update_id'];
+            $id = $_POST['update_id'];
             $select_stmt = $db->prepare('SELECT * FROM nf_admin WHERE id = :id');
             $select_stmt->bindParam(":id", $id);
             $select_stmt->execute();
@@ -34,18 +34,6 @@ if ($_SESSION['admin_login'] == "") {
             $password = $_REQUEST['password'];
             $con_pass = $_REQUEST['con-pass'];
 
-            // if (empty($f_name)) {
-            //     $errorMsg = "ใส่ชื่ออาหาร";
-            // } else if (empty($f_type)) {
-            //     $errorMsg = "เลือกประเภท";
-            // } else if (empty($f_ingreedients)) {
-            //     $errorMsg = "ใส่วัตถุดิบ/ส่วนผสม";
-            // } else if (empty($f_spices)) {
-            //     $errorMsg = "ใส่เครื่องเทศ/เครื่องแกง";
-            // } else if (empty($f_desc)) {
-            //     $errorMsg = "ใส่คำอธิบาย";
-            // } 
-
             if($password === $con_pass) {
                 if (!isset($errorMsg)) {
                     $update_stmt = $db->prepare("UPDATE nf_admin SET username = :username, email = :email, password = :password WHERE id = :id");
@@ -59,7 +47,7 @@ if ($_SESSION['admin_login'] == "") {
                         // header('refresh:1; food.php');
                         echo "<script>";
                         echo "alert('แก้ไขข้อมูลสำเร็จ..');";
-                        echo "window.location.href='admin.php'";
+                        echo "window.location.href='view_admin.php'";
                         echo "</script>";
                     } else {
                         $errorMsg = "ERORR";
@@ -113,13 +101,13 @@ if ($_SESSION['admin_login'] == "") {
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="">ชื่อผู้ใช้</label>
-                                <input type="text" class="form-control" name="username" value="<?php echo $data["username"]; ?>">
+                                <input type="text" class="form-control" name="username" value="<?php echo $data["username"]; ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="">Email</label>
-                                <input type="text" class="form-control" name="email" value="<?php echo $data["email"]; ?>">
+                                <input type="text" class="form-control" name="email" value="<?php echo $data["email"]; ?>" required>
                             </div>
                         </div>
                     </div>
@@ -127,13 +115,13 @@ if ($_SESSION['admin_login'] == "") {
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label class="form-label">รหัสผ่าน</label>
-                                <input class="form-control" type="text" name="password" value="<?php echo $data["password"]; ?>">
+                                <input class="form-control" type="text" name="password" value="<?php echo $data["password"]; ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label class="form-label">ยืนยันรหัสผ่าน</label>
-                                <input class="form-control" type="text" name="con-pass" value="">
+                                <input class="form-control" type="text" name="con-pass" value="" required>
                             </div>
                         </div>
                     </div>                  

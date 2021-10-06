@@ -10,10 +10,6 @@ if ($_SESSION['admin_login'] == "") {
     require_once 'template_admin/slidebar_template.php';
     require_once 'template_admin/topbar_template.php';
 
-    $type = $db->prepare('SELECT * from nf_type');
-    $type->execute();
-    $type_row = $type->fetchAll();
-
     if (isset($_REQUEST['update_id'])) {
         try {
             $id = $_REQUEST['update_id'];
@@ -22,7 +18,7 @@ if ($_SESSION['admin_login'] == "") {
             $select_stmt->execute();
             $data = $select_stmt->fetch(PDO::FETCH_ASSOC);
             extract($data);
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             $e->getMessage();
         }
     }
@@ -34,7 +30,7 @@ if ($_SESSION['admin_login'] == "") {
             $f_ingredients = $_REQUEST['food_ingredients'];
             $f_spices = $_REQUEST['food-spices'];
             $f_desc = $_REQUEST['food-desc'];
-            
+
             $img_file = $_FILES['food-img']['name'];
             $img_type = $_FILES['food-img']['type'];
             $img_size = $_FILES['food-img']['size'];
@@ -64,8 +60,8 @@ if ($_SESSION['admin_login'] == "") {
                 if ($img_type == "image/jpg" || $img_type == 'image/jpeg' || $img_type == "image/png" || $img_type == "image/gif" && $bg_type == "image/jpg" || $bg_type == 'image/jpeg' || $bg_type == "image/png" || $bg_type == "image/gif") {
                     if (!file_exists($img_path && $bg_path)) { // check file not exist in your upload folder path
                         if ($img_size && $bg_size < 5000000) { // check file size 5MB
-                            unlink($img_directory.$data['food_img']);
-                            unlink($bg_directory.$data['food_bg']);
+                            unlink($img_directory . $data['food_img']);
+                            unlink($bg_directory . $data['food_bg']);
                             move_uploaded_file($img_temp, 'upload/food/img/' . $img_file); // move upload file temperory directory to your upload folder
                             move_uploaded_file($bg_temp, 'upload/food/bg/' . $bg_file);
                         } else {
@@ -106,7 +102,6 @@ if ($_SESSION['admin_login'] == "") {
             } else {
                 $errorMsg = "ERORR";
             }
-
         } catch (PDOException $e) {
             $e->getMessage();
         }
@@ -144,20 +139,24 @@ if ($_SESSION['admin_login'] == "") {
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-lg-6 col-md-12">
                             <div class="form-group">
                                 <label for="">ชื่อ</label>
-                                <input type="text" class="form-control" name="food-name" value="<?php echo $data["food_name"]; ?>">
+                                <input type="text" class="form-control" name="food-name" value="<?php echo $data["food_name"]; ?>" required>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-lg-6 col-md-12">
                             <div class="form-group">
                                 <label for="">ประเภท</label>
-                                <select class="form-select" name="food-type">
+                                <select class="form-select" name="food-type" required>
                                     <option disabled>ประเภทอาหาร</option>
-                                    <?php foreach ($type_row as $row) { ?>
-                                        <option value="<?php echo $row["type_id"]; ?>">
-                                            <?php echo $row["type_name"]; ?>
+                                    <?php
+                                    $type = $db->prepare('SELECT * from nf_type');
+                                    $type->execute();
+                                    while ($type_row = $type->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                        <option value="<?php echo $type_row['type_id']; ?>" <?php if ($type_row['type_id'] == $data['type_id']) { ?> selected="selected" <?php } ?>>
+                                            <?php echo $type_row['type_name']; ?>
                                         </option>
                                     <?php } ?>
                                 </select>
@@ -167,32 +166,43 @@ if ($_SESSION['admin_login'] == "") {
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label for="">ส่วนผสม</label>
-                                <textarea type="text" class="form-control" rows="4" name="food_ingredients"><?php echo $data["food_ingredients"]; ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="">เครื่องเคียง/เครื่องแกง</label>
-                                <textarea type="text" class="form-control" rows="4" name="food-spices"><?php echo $data["food_spices"]; ?></textarea>
-                            </div>
-                            <div class="form-group">
                                 <label class="form-label">รูปอาหาร</label>
                                 <p>
                                     <img src="upload/food/img/<?php echo $data["food_img"]; ?>" height="100" width="150" alt="">
                                 </p>
-                                <input class="form-control" type="file" name="food-img" value="<?php echo $data["food_img"]; ?>">
+                                <input class="form-control" type="file" name="food-img" value="<?php echo $data["food_img"]; ?>" accept="image/png, image/jpeg, image/jpg, image/gif">
                             </div>
-                            <div class="form-group">
-                                <label for="">คำบรรยาย</label>
-                                <textarea type="text" class="form-control" rows="4" name="food-desc"><?php echo $data["food_desc"]; ?></textarea>
-                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label class="form-label">รูปพื้นหลัง</label>
                                 <p>
                                     <img src="upload/food/bg/<?php echo $data["food_bg"]; ?>" height="100" width="150" alt="">
                                 </p>
-                                <input class="form-control" type="file" name="food-bg" value="<?php echo $data["food_bg"]; ?>">
+                                <input class="form-control" type="file" name="food-bg" value="<?php echo $data["food_bg"]; ?>" accept="image/png, image/jpeg, image/jpg, image/gif">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="form-group">
+                                <label for="">ส่วนผสม</label>
+                                <textarea type="text" class="form-control" rows="6" name="food_ingredients" required><?php echo $data["food_ingredients"]; ?></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="form-group">
+                                <label for="">เครื่องเคียง/เครื่องแกง</label>
+                                <textarea type="text" class="form-control" rows="6" name="food-spices" required><?php echo $data["food_spices"]; ?></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="form-group">
+                                <label for="">คำบรรยาย</label>
+                                <textarea type="text" class="form-control" rows="6" name="food-desc" required><?php echo $data["food_desc"]; ?></textarea>
+                            </div>
+                        </div>
+                    </div>
                         <!-- <div class="col-md-6 col-sm-12">
                             <h4 style="padding-top: 10px;">ชื่อร้านอาหาร</h4>
                             <div class="table-responsive">
@@ -207,10 +217,10 @@ if ($_SESSION['admin_login'] == "") {
                                 </thead>
                                     <tbody>
                                     <?php
-                                        $row = 1;
-                                        $res = $db->prepare('SELECT * from nf_res');
-                                        $res->execute();
-                                        while ($data = $res->fetch(PDO::FETCH_ASSOC)){
+                                    $row = 1;
+                                    $res = $db->prepare('SELECT * from nf_res');
+                                    $res->execute();
+                                    while ($data = $res->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
                                         <tr height="75px" style="text-align: center;">
                                             <td class="align-middle"><?php echo $row; ?></td>
@@ -219,9 +229,9 @@ if ($_SESSION['admin_login'] == "") {
                                             <td class="align-middle"><a href="edit.php?update_id=<?php echo $row['id']; ?>" class="btn btn-warning">แก้ไข<a></td>
                                         </tr>
                                     <?php
-                                    $row++;
+                                        $row++;
                                     }
-                                    
+
                                     ?>
                                     </tbody>
                                 </table>
