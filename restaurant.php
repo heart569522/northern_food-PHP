@@ -5,7 +5,7 @@
     session_start();
 
     if ($_SESSION['admin_login'] == "") {
-        header("location: signin.php");
+        header("location: signin");
     } else {
 
         require_once 'template_admin/head_template.php';

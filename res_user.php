@@ -81,7 +81,7 @@ $res_row = $res->fetchAll();
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
 
                 <?php foreach ($res_row as $row) { ?>
-                    <a href="res_detail.php?res_id=<?php echo $row['res_id']; ?>" class="card-hover">
+                    <a href="res_detail?res_id=<?php echo $row['res_id']; ?>" class="card-hover">
                         <div class="col">
                             <div class="card shadow-sm hover-zoom">
                                 <figure class="figure-list"><img class="img-fluid " src="upload/res/img/<?php echo $row['res_img'] ?>" width="100%"></figure>

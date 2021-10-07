@@ -3,7 +3,7 @@ session_start();
 include_once('./admin_page/model/connection.php');
 
 if ($_SESSION['admin_login'] == "") {
-    header("location: signin.php");
+    header("location: signin");
 } else {
 
     require_once 'template_admin/head_template.php';
@@ -47,7 +47,7 @@ if ($_SESSION['admin_login'] == "") {
                         // header('refresh:1; food.php');
                         echo "<script>";
                         echo "alert('แก้ไขข้อมูลสำเร็จ..');";
-                        echo "window.location.href='view_admin.php'";
+                        echo "window.location.href='view_admin'";
                         echo "</script>";
                     } else {
                         $errorMsg = "ERORR";

@@ -3,7 +3,7 @@
     echo '
     <script>
         history.go(0);
-        window.location.replace("signin.php");
+        window.location.replace("signin");
     </script>
         ';
 

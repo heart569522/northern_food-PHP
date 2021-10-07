@@ -20,7 +20,7 @@
 
             <!-- Nav Item - Home -->
             <li class="nav-item active">
-                <a style="color: #FF8000;" class="nav-link" href="admin.php">
+                <a style="color: #FF8000;" class="nav-link" href="admin">
                     <i style="color: #FF8000;" class="fas fa-home"></i>
                     <span>หน้าแรก</span></a>
             </li>
@@ -51,9 +51,9 @@
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="./restaurant.php">ร้านค้า</a>
-                        <a class="collapse-item" href="./food.php">เมนู</a>
-                        <a class="collapse-item" href="./view_admin.php">ผู้ดูแลระบบ</a>
+                        <a class="collapse-item" href="./restaurant">ร้านค้า</a>
+                        <a class="collapse-item" href="./food">เมนู</a>
+                        <a class="collapse-item" href="./view_admin">ผู้ดูแลระบบ</a>
                     </div>
                 </div>
             </li>
@@ -63,7 +63,7 @@
 
             <!-- Nav Item - Logout -->
             <li class="nav-item">
-                <a class="nav-link" href="logout.php">
+                <a class="nav-link" href="logout">
                     <i style="color: #FF8000;" class="fas fa-sign-out-alt"></i>
                     <span style="color: #FF8000;">ออกจากระบบ</span></a>
             </li>

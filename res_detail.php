@@ -63,7 +63,7 @@ if (isset($_REQUEST['res_id'])) {
                                 $select_stmt->execute();
                                 while ($data = $select_stmt->fetch(PDO::FETCH_ASSOC)){
                             ?>
-                                <a href="food_detail.php?food_id=<?php echo $data['food_id']; ?>" class="card-hover">
+                                <a href="food_detail?food_id=<?php echo $data['food_id']; ?>" class="card-hover">
                                     <div class="col">
                                         <div class="card shadow-sm hover-zoom">
                                             <figure class="figure-list"><img class="img-fluid " src="upload/food/img/<?php echo $data['food_img'] ?>" width="100%"></figure>

@@ -2,7 +2,7 @@
 
     session_start();
     
-    header("location: refresh.php");
+    header("location: refresh");
     session_destroy();
 
 ?>

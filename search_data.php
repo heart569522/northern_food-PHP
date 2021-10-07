@@ -94,7 +94,7 @@
                     $select_stmt_food->execute();
                     while ($data_food = $select_stmt_food->fetch(PDO::FETCH_ASSOC)){ 
                 ?>
-                    <a href="food_detail.php?food_id=<?php echo $data_food['food_id']; ?>" class="card-hover">
+                    <a href="food_detail?food_id=<?php echo $data_food['food_id']; ?>" class="card-hover">
                         <div class="col">
                             <div class="card shadow-sm hover-zoom">
                                 <figure class="figure-list"><img class="img-fluid " src="upload/food/img/<?php echo $data_food['food_img'] ?>" width="100%"></figure>
@@ -115,7 +115,7 @@
                     $select_stmt_res->execute();
                     while ($data_res = $select_stmt_res->fetch(PDO::FETCH_ASSOC)){ 
                 ?>
-                    <a href="res_detail.php?res_id=<?php echo $data_res['res_id']; ?>" class="card-hover">
+                    <a href="res_detail?res_id=<?php echo $data_res['res_id']; ?>" class="card-hover">
                         <div class="col">
                             <div class="card shadow-sm hover-zoom">
                                 <figure class="figure-list"><img class="img-fluid " src="upload/res/img/<?php echo $data_res['res_img'] ?>" width="100%"></figure>

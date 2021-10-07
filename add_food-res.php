@@ -3,7 +3,7 @@ session_start();
 include_once('./admin_page/model/connection.php');
 
 if ($_SESSION['admin_login'] == "") {
-    header("location: signin.php");
+    header("location: signin");
 } else {
 
     require_once 'template_admin/head_template.php';
@@ -149,8 +149,8 @@ if ($_SESSION['admin_login'] == "") {
                                                         <td class="align-middle"><?php echo $data["food_name"]; ?></td>
                                                         <!-- <td class="align-middle"><?php echo $data["type_name"]; ?></td> -->
                                                         <td class="align-middle">
-                                                            <a href="edit_food.php?update_id=<?php echo $data['food_id']; ?>" class="btn btn-warning">แก้ไข<a>
-                                                                    <a href="del_food-res.php?delete_id=<?php echo $data['food_res_id']; ?>&res_id=<?php echo $r_id; ?>" class="btn btn-danger">ลบ<a>
+                                                            <a href="edit_food?update_id=<?php echo $data['food_id']; ?>" class="btn btn-warning">แก้ไข<a>
+                                                                    <a href="del_food-res?delete_id=<?php echo $data['food_res_id']; ?>&res_id=<?php echo $r_id; ?>" class="btn btn-danger">ลบ<a>
                                                         </td>
                                                     </tr>
                                                 <?php

@@ -8,7 +8,7 @@
         </div>
         <div class="col-6">
             
-            <a style="float: right;" href="./add_res.php" class="btn btn-success">เพิ่มร้านค้า</a>
+            <a style="float: right;" href="./add_res" class="btn btn-success">เพิ่มร้านค้า</a>
         </div>
     </div>
     <br>
@@ -46,8 +46,8 @@
                                 <td class="align-middle"><?php echo $data["res_desc"]; ?></td>
                                 <td class="align-middle">
                                     <div class="btn-group" role="group">
-                                        <a href="add_food-res.php?res_id=<?php echo $data['res_id']; ?>" class="btn btn-primary">เพิ่มเมนูในร้าน</a>
-                                        <a href="edit_res.php?update_id=<?php echo $data['res_id']; ?>" class="btn btn-warning">แก้ไข</a>
+                                        <a href="add_food-res?res_id=<?php echo $data['res_id']; ?>" class="btn btn-primary">เพิ่มเมนูในร้าน</a>
+                                        <a href="edit_res?update_id=<?php echo $data['res_id']; ?>" class="btn btn-warning">แก้ไข</a>
                                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">ลบร้านค้า</button>
                                     </div>
                                     <!-- Modal -->
@@ -64,7 +64,7 @@
                                                 <h4>ยืนยันการลบข้อมูล...</h4>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="del_res.php?delete_id=<?php echo $data['res_id']; ?>" class="btn btn-danger">ลบ</a>
+                                                <a href="del_res?delete_id=<?php echo $data['res_id']; ?>" class="btn btn-danger">ลบ</a>
                                                 <!-- <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button> -->
                                             </div>
                                         </div>

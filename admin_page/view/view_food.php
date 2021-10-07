@@ -7,8 +7,8 @@
         <h1 class="h3 mb-2 text-gray">รายการอาหาร</h1>
     </div>
     <div class="col-6">
-        <a style="float: right;" href="./add_type.php" class="btn btn-primary" >เพิ่มประเภท</a>
-        <a style="float: right;" href="./add_food.php" class="btn btn-success" >เพิ่มเมนู</a>
+        <a style="float: right;" href="./add_type" class="btn btn-primary" >เพิ่มประเภท</a>
+        <a style="float: right;" href="./add_food" class="btn btn-success" >เพิ่มเมนู</a>
     </div>
 </div>
 
@@ -48,7 +48,7 @@
                                 <td class="align-middle"><?php echo $data["food_desc"]; ?></td>
                                 <td class="align-middle">
                                     <div class="btn-group" role="group">
-                                        <a href="edit_food.php?update_id=<?php echo $data['food_id']; ?>" class="btn btn-warning">แก้ไข</a>
+                                        <a href="edit_food?update_id=<?php echo $data['food_id']; ?>" class="btn btn-warning">แก้ไข</a>
                                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">ลบเมนู</button>
                                     </div>
                                         <!-- Modal -->
@@ -65,7 +65,7 @@
                                                 <h4>ยืนยันการลบข้อมูล...</h4>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="del_food.php?delete_id=<?php echo $data['food_id']; ?>" class="btn btn-danger">ลบ</a>
+                                                <a href="del_food?delete_id=<?php echo $data['food_id']; ?>" class="btn btn-danger">ลบ</a>
                                                 <!-- <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button> -->
                                             </div>
                                         </div>

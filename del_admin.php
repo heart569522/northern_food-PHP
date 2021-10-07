@@ -10,7 +10,7 @@ include_once('./admin_page/model/connection.php');
         $delete_stmt->bindParam(':id', $id);
         if($delete_stmt->execute()) {
             echo "<script>alert('ลบข้อมูลสำเร็จ..กำลังออกจากระบบ');</script>";
-            echo "<script>window.location.href='logout.php';</script>";
+            echo "<script>window.location.href='logout';</script>";
         }
         
     } else {

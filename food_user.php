@@ -81,7 +81,7 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
 
             <?php foreach ($food_row as $row) { ?>
-                <a href="food_detail.php?food_id=<?php echo $row['food_id']; ?>" class="card-hover">
+                <a href="food_detail?food_id=<?php echo $row['food_id']; ?>" class="card-hover">
                     <div class="col">
                         <div class="card shadow-sm hover-zoom">
                             <figure class="figure-list"><img class="img-fluid " src="upload/food/img/<?php echo $row['food_img'] ?>" width="100%"></figure>

@@ -63,7 +63,7 @@
                             ':password' => $password
                         ))) {
                             $registerMsg = "Register successfully Please waiting...";
-                            header("refresh:1;signin.php");
+                            header("refresh:1;signin");
                         }
                     //}
                 } else {

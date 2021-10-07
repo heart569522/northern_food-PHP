@@ -3,7 +3,7 @@ session_start();
 include_once('./admin_page/model/connection.php');
 
 if ($_SESSION['admin_login'] == "") {
-    header("location: signin.php");
+    header("location: signin");
 } else {
     require_once 'template_admin/head_template.php';
     require_once 'template_admin/slidebar_template.php';

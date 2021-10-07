@@ -57,7 +57,7 @@ $food_row = $food->fetchAll();
                                 // if ($id != $food_row['food_id']) {
                                 foreach ($food_row as $row) {
                                 ?>
-                                    <a style="text-decoration: none; color: #000;" href="food_detail.php?food_id=<?php echo $row['food_id']; ?>">
+                                    <a style="text-decoration: none; color: #000;" href="food_detail?food_id=<?php echo $row['food_id']; ?>">
                                         <div class="card mb-3" style="max-width: 540px;">
                                             <div class="row g-0">
                                                 <div class="col-md-4">
@@ -107,7 +107,7 @@ $food_row = $food->fetchAll();
                             $select_stmt->execute();
                             while ($data = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <a href="res_detail.php?res_id=<?php echo $data['res_id']; ?>" class="card-hover">
+                                <a href="res_detail?res_id=<?php echo $data['res_id']; ?>" class="card-hover">
                                     <div class="col">
                                         <div class="card shadow-sm hover-zoom">
                                             <figure class="figure-list"><img class="img-fluid " src="upload/res/img/<?php echo $data['res_img'] ?>" width="100%"></figure>

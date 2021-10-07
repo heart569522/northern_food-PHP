@@ -11,7 +11,7 @@ include_once('./admin_page/model/connection.php');
         $delete_stmt->bindParam(':id', $id);
         if($delete_stmt->execute()) {
             echo "<script>alert('ลบข้อมูลสำเร็จ..');</script>";
-            echo '<script>window.location.href="add_food-res.php?res_id='.$r_id.'";</script>';
+            echo '<script>window.location.href="add_food-res?res_id='.$r_id.'";</script>';
         }
         
     } else {

@@ -3,7 +3,7 @@ require_once('./admin_page/model/connection.php');
 session_start();
 
 if (isset($_SESSION['admin_login'])) {
-    header("location: admin.php");
+    header("location: admin");
 }
 
 if (isset($_REQUEST['btn_login'])) {
@@ -26,7 +26,7 @@ if (isset($_REQUEST['btn_login'])) {
                     if ($password == $row['password']) {
                         $_SESSION['admin_login'] = $row['id'];
                         $loginMsg = "Successfully Login Please waiting...";
-                        header("refresh:1;admin.php");
+                        header("refresh:1;admin");
                     } else {
                         $errorMsg[] = "Wrong password!";
                     }

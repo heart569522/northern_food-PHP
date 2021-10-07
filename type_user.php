@@ -81,7 +81,7 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-3">
 
             <?php foreach ($type_row as $row) { ?>
-                <a href="type_detail.php?type_id=<?php echo $row['type_id']; ?>" class="card-hover">
+                <a href="type_detail?type_id=<?php echo $row['type_id']; ?>" class="card-hover">
                     <div class="col">
                         <div class="card shadow-sm hover-zoom">
                             <!-- <figure class="figure-list"></figure> -->

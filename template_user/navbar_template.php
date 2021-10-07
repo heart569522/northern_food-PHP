@@ -19,19 +19,19 @@
         <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
             <li class="nav-item active">
-                <a class="nav-link" aria-current="page" href="./index.php">หน้าแรก</a>
+                <a class="nav-link" aria-current="page" href="./index">หน้าแรก</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="./type_user.php">ประเภทอาหาร</a>
+                <a class="nav-link" aria-current="page" href="./type_user">ประเภทอาหาร</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="./res_user.php">ร้านอาหาร</a>
+                <a class="nav-link" aria-current="page" href="./res_user">ร้านอาหาร</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="./food_user.php">เมนูอาหาร</a>
+                <a class="nav-link" aria-current="page" href="./food_user">เมนูอาหาร</a>
             </li>
         </ul>
-        <form class="d-flex" method="post" action="./search_data.php">
+        <form class="d-flex" method="post" action="./search_data">
             <input class="form-control mr-2" type="search" name="search" placeholder="ค้นหา..." aria-label="Search" required>
             <button class="btn btn-outline-warning" type="submit">ค้นหา</button>
         </form>
